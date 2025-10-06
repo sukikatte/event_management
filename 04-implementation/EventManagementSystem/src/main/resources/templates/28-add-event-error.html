@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Event Error</title>
+    <style>
+        body {
+            background-image: url("https://gues-songs.oss-cn-beijing.aliyuncs.com/songs/bg1.jpg");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            font-family: Arial, sans-serif;
+            background-attachment: fixed;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .error-container {
+            text-align: center;
+            background-color: rgb(255, 255, 255, 0.65);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            width: 400px;
+        }
+        .error-icon {
+            font-size: 60px;
+            color: #dc3545;
+            margin-bottom: 20px;
+        }
+        .error-message {
+            font-size: 18px;
+            color: #333;
+            margin-bottom: 30px;
+        }
+        .error-message strong {
+            display: block;
+        }
+        .btn-cancel {
+            display: inline-block;
+            padding: 15px 30px;
+            background-color: #dc3545;
+            color: white;
+            font-size: 18px;
+            font-weight: bold;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+        .btn-cancel:hover {
+            background-color: #a71d2a;
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+
+<div class="error-container">
+    <div class="error-icon">✖</div>
+    <div class="error-message">
+        <strong>Invalid Input:</strong><br>
+        The information of event is existing.<br>
+        Please input another information.
+    </div>
+    <a href="#" class="btn-cancel">Cancel</a>
+</div>
+
+</body>
+</html>

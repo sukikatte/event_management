@@ -1,0 +1,19 @@
+title Sequence Diagram: 19 View Tickets
+
+actor "<link:_>User" as u
+control "<link:_>: TicketController" as c
+participant "<link:_>: TicketService" as s
+
+== 1. The user selects an event to view its details on the home-tickets page (09-tickets-user) ==
+u -> c: viewTicketDetail()
+activate c
+== 2. The system displays detailed information for the selected event ==
+c -> s: getTicket(admission)
+activate s
+note over s:The getTicket(admission) method gets \nthe date, time, venue number, and \nother details about the ticket
+s --> c: return Ticket 
+deactivate s
+c -> c:updateDisplay()
+
+c -> u: return tickets details
+deactivate c

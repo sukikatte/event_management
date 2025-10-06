@@ -1,0 +1,31 @@
+title Sequence Diagram:01 Create Account( Creating an Organizer Account)
+actor "<link:_> Administrator" as Admin
+control "<link:_>: AccountController" as AccountController
+entity "<link:_> :Organizer" as Organizer
+participant "<link:_>: AccountService" as AccountService
+
+
+==1. The administrator selects the create account functionality\n2,The system displays an input form to get the required details (details required are based on the type of account being created) - 05-create-account\n3.The administrator enters the details of the account==
+
+Admin -> AccountController : createOrganzier(details)
+activate AccountController
+AccountController -> AccountService : addAccount(details)
+activate AccountService
+AccountService->AccountService:getAdministrator(email)
+activate AccountService
+AccountService-->AccountService:ruturn null
+deactivate AccountService
+    AccountService -> *Organizer : Organizer(name, password, email, phone_number, address)
+    activate Organizer
+    deactivate Organizer
+    Organizer --> AccountService : Return new Organizer account
+    AccountService --> AccountController : Return Organizer account
+deactivate AccountService
+    AccountController -> AccountController : updateAccountDetail()
+
+
+AccountController --> Admin : 
+deactivate AccountController
+
+==4. The system displays the view account page with the details of the created account shown\n(12-view&modify-account-admin-admin/15-view&modify-account-admin-organiser)==
+

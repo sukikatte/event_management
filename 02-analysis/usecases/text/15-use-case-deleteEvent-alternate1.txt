@@ -1,0 +1,41 @@
+title Sequence Diagram: 15 Delete Event (Alternate Course of Events - Not Confirmed)
+
+actor Administrator
+control ":EventController" as EventController
+control ":EventService" as EventService
+
+== 1. The administrator selects the delete event functionality adjacent to the event they want to remove on the main page ==
+
+Administrator -> EventController: deleteEvent()
+activate EventController
+EventController -> EventService: getEvent(name)
+
+activate EventService
+
+note over EventController: The checkIfEventExists method checks \n if the event exists before deletion
+
+
+EventService --> EventController: return True
+deactivate EventService
+
+
+EventController -> EventService: deleteEvent()
+activate EventService
+
+note over EventController: The deleteEvent method deletes the selected \n event from database if the event exists
+
+EventService --> EventController: return NONE
+deactivate EventService
+
+note right of EventController: This part happens in the JavaScript.
+
+EventController -> Administrator: return delete warning
+
+== 2. The system asks the administrator to confirm the deletion of the event (19-delete-event-warning) ==
+
+
+== 3. The administrator clicks Cancel \n 4. The system returns to the main page (01-main-admin) with no changes ==
+
+EventController -> Administrator: return to the main page (01-main-admin)
+deactivate EventController
+

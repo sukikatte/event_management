@@ -1,0 +1,11 @@
+title Sequence Diagram: 04 Modify Account (Alternate Course of Events - Invalid Input)
+
+actor "Administrator/ Organiser/ User" as a
+
+
+
+
+==1. The administrator, organizer or user selects the "change" option for password on view account page **(06-view-account)**\n2. The system displays the modify one of the account detail information which shows the detail as editable fields\n3. The administrator, organizer or user enters the updated detail of the account and clicks save\n4. The system displays a warning message indicating that the input is invalid \n5. The system returns to the view account page**（06-view-account）**==
+
+
+note right of a:This part happens in the JavaScript.

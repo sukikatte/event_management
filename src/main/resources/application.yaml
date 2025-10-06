@@ -1,0 +1,19 @@
+spring:
+  datasource:
+    driverClassName: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/eventdb
+    username: root
+    password: verysecret
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect   # 使用 MySQL8Dialect
+        storage_engine: innodb
+    hibernate:
+      ddl-auto: update    # 自动更新数据库表结构（根据需求设置）
+  sql:
+    init:
+      mode: always        # 可选：根据需求配置是否加载 SQL 初始化脚本
+  h2:
+    console:
+      enabled: false      # 禁用 H2 控制台

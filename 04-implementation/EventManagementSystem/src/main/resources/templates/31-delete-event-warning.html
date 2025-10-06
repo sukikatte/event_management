@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Delete Event Warning</title>
+  <style>
+    body {
+      background-image: url("https://gues-songs.oss-cn-beijing.aliyuncs.com/songs/bg1.jpg");
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      font-family: Arial, sans-serif;
+      background-attachment: fixed;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .error-container {
+      text-align: center;
+      background-color: rgb(255, 255, 255, 0.65);
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      width: 400px;
+    }
+    .error-icon {
+      font-size: 60px;
+      color: #ffc107;
+      margin-bottom: 20px;
+    }
+    .error-message {
+      font-size: 18px;
+      color: #333;
+      margin-bottom: 30px;
+    }
+    .error-message strong {
+      display: block;
+    }
+    .button-group {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+    }
+    .btn {
+      display: inline-block;
+      padding: 15px 30px;
+      font-size: 18px;
+      font-weight: bold;
+      text-decoration: none;
+      border-radius: 5px;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+      text-align: center;
+      flex: 1;
+    }
+    .btn-delete {
+      background-color: #dc3545;
+      color: white;
+    }
+    .btn-delete:hover {
+      background-color: #a71d2a;
+      transform: scale(1.05);
+    }
+    .btn-cancel {
+      background-color: #007bff;
+      color: white;
+    }
+    .btn-cancel:hover {
+      background-color: #0056b3;
+      transform: scale(1.05);
+    }
+  </style>
+</head>
+<body>
+
+<div class="error-container">
+  <div class="error-icon">⚠</div>
+  <div class="error-message">
+    <strong>Warning:</strong><br>
+    Are you sure you want to delete this event?<br>
+    This action cannot be undone.
+  </div>
+  <form id="deleteForm" action="#" th:action="@{/performDeleteEvent}" method="get" style="display:none;">
+    <input type="hidden" name="eId" th:value="${event.id}">
+  </form>
+  <div class="button-group">
+    <button type="button" class="btn btn-delete">Delete</button>
+    <a href="/administrator" class="btn btn-cancel">Cancel</a>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var deleteButton = document.querySelector('.btn-delete');
+    deleteButton.addEventListener('click', function(event) {
+      event.preventDefault();
+      document.getElementById('deleteForm').submit();
+    });
+  });
+</script>
+
+</body>
+</html>

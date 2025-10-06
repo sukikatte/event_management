@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modify Event - Organiser</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f4f8;
+        }
+        .container {
+            width: 60%;
+            margin: 40px auto;
+            padding: 20px;
+            background-color: #dceeff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 28px;
+            color: #333;
+        }
+        h2 {
+            margin: 5px 0;
+            font-size: 18px;
+        }
+        .event-details {
+            display: flex;
+            justify-content: flex-start;
+            gap: 40px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+        }
+        .event-info {
+            flex: 2;
+            padding-left: 20px;
+            margin-left: 20px;
+        }
+        .description {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: flex-start;
+            margin-top: 10px;
+        }
+        .description img {
+            width: 100%;
+            max-width: 220px;
+            height: 180px;
+            object-fit: cover;
+            border: 2px dashed #007bff;
+            border-radius: 8px;
+            background-color: #e0e0e0;
+            margin-bottom: 15px;
+        }
+        .event-info .detail-item {
+            display: flex;
+            align-items: center;
+            margin: 15px 0;
+            font-size: 18px;
+        }
+        .event-info .detail-item input,
+        .event-info .detail-item select {
+            font-size: 16px;
+            padding: 8px;
+            width: 60%;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-right: 20px;
+        }
+        .event-info .detail-item button {
+            font-size: 16px;
+            padding: 8px 12px;
+            background-color: #ffc107;
+            color: white;
+            border: 2px solid black;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+        .event-info .detail-item button:hover {
+            background-color: #e0a800;
+        }
+        .buttons {
+            margin-top: 20px;
+            text-align: center;
+        }
+        .buttons a {
+            text-decoration: none;
+            color: white;
+            padding: 15px 30px;
+            border-radius: 5px;
+            margin: 15px;
+            display: inline-block;
+            font-size: 18px;
+            transition: all 0.3s ease;
+            font-weight: bold;
+            width: 150px;
+            text-align: center;
+        }
+        .btn-return {
+            background-color: #007bff;
+        }
+        .btn-return:hover {
+            background-color: #0056b3;
+            transform: scale(1.05);
+        }
+        .btn-save {
+            background-color: #28a745;
+        }
+        .btn-save:hover {
+            background-color: #218838;
+            transform: scale(1.05);
+        }
+        .btn-edit {
+            background-color: #007bff;
+        }
+        .btn-edit:hover {
+            background-color: #0056b3;
+            transform: scale(1.05);
+        }
+        .btn-cancel {
+            background-color: #dc3545;
+        }
+        .btn-cancel:hover {
+            background-color: #c82333;
+            transform: scale(1.05);
+        }
+        input[type="text"], input[type="file"], select {
+            font-size: 16px;
+            padding: 8px;
+            width: 100%;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .change-btn {
+            background-color: #ffc107;
+            color: #fff;
+            padding: 6px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            border: 2px solid black;
+            margin-left: 10px;
+            display: inline-block;
+        }
+        .change-btn:hover {
+            background-color: #e0a800;
+        }
+    </style>
+</head>
+<body>
+
+
+<div class="container">
+    <div class="event-details">
+        <!-- Description Section -->
+        <div class="description">
+            <div>
+                <strong>Description:</strong>
+                <button class="change-btn" onclick="editField('event-description')">Change</button>
+            </div>
+            <input type="text" id="event-description" value="XXXXXXXXXXXXXXXXXXXXXX" disabled />
+            <!-- Image Upload Section -->
+            <div class="image-upload" style="margin-top: 20px;">
+                <strong>Upload Event Image:</strong>
+                <input type="file" id="event-image" accept="image/*" onchange="previewImage(event)" />
+                <div id="image-preview">
+                    <img id="image" src="" alt="Event Image" />
+                </div>
+            </div>
+        </div>
+
+        <!-- Event Info Section -->
+        <div class="event-info">
+            <div class="detail-item">
+                <strong>Event Name:</strong>
+                <input type="text" id="event-name" value="XXX" disabled>
+                <button class="change-btn" onclick="editField('event-name')">Change</button>
+            </div>
+            <div class="detail-item">
+                <strong>Venue No.</strong>
+                <select id="venue_id" name="venue" required>
+                    <option th:each="venue : ${venues}"
+                            th:value="${venue.getId()}" th:text="${venue.getName()}"></option>
+                </select>
+
+<!--                <select id="venue-no" disabled>-->
+<!--                    <option value="1">Venue 1</option>-->
+<!--                    <option value="2">Venue 2</option>-->
+<!--                    <option value="3">Venue 3</option>-->
+<!--                </select>-->
+                <button class="change-btn" onclick="editField('venue-no')">Change</button>
+            </div>
+            <div class="detail-item">
+                <strong>Date:</strong>&nbsp;&nbsp;&nbsp;
+                <input type="text" id="event-date" value="XXX" disabled>
+                <button class="change-btn" onclick="editField('event-date')">Change</button>
+            </div>
+            <div class="detail-item">
+                <strong>Time:</strong>&nbsp;&nbsp;&nbsp;
+                <input type="text" id="time" value="XXX" disabled>
+                <button class="change-btn" onclick="editField('time')">Change</button>
+            </div>
+            <div class="detail-item">
+                <strong>Price:</strong>&nbsp;&nbsp;&nbsp;
+                <input type="text" id="price" value="XXX" disabled>
+                <button class="change-btn" onclick="editField('price')">Change</button>
+            </div>
+            <div class="detail-item">
+                <strong>Total Number:</strong>
+                <input type="text" id="total-number" value="XXX" disabled>
+                <button class="change-btn" onclick="editField('total-number')">Change</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Buttons Section -->
+    <div class="buttons">
+        <a href="20-events-organiser.html" class="btn-return">Return</a>
+        <a href="#" class="btn-save" id="save-btn" style="display:none;" onclick="saveChanges()">Save</a>
+        <a href="#" class="btn-cancel" onclick="cancelChanges()">Cancel</a>
+    </div>
+</div>
+
+<script>
+    function editField(field) {
+        // Allow editing by enabling the input field
+        document.getElementById(field).disabled = false;
+        document.getElementById('save-btn').style.display = 'inline-block';
+    }
+
+    function saveChanges() {
+        // Save changes and disable the input fields
+        const fields = ['event-name', 'venue-no', 'event-date', 'time', 'price', 'total-number', 'event-description'];
+        fields.forEach(function(field) {
+            let inputField = document.getElementById(field);
+            if (inputField) {
+                inputField.disabled = true;
+            }
+        });
+        document.getElementById('save-btn').style.display = 'none';
+    }
+
+    function cancelChanges() {
+        // Cancel changes and reset the fields
+        const fields = ['event-name', 'venue-no', 'event-date', 'time', 'price', 'total-number', 'event-description'];
+        fields.forEach(function(field) {
+            let inputField = document.getElementById(field);
+            if (inputField) {
+                inputField.value = "XXX";
+                inputField.disabled = true;
+            }
+        });
+        document.getElementById('save-btn').style.display = 'none';
+    }
+
+    function previewImage(event) {
+        const reader = new FileReader();
+        reader.onload = function() {
+            const output = document.getElementById('image');
+            output.src = reader.result;
+        }
+        reader.readAsDataURL(event.target.files[0]);
+    }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign In</title>
+    <style>
+        body {
+            background-image: url("https://gues-songs.oss-cn-beijing.aliyuncs.com/songs/bg1.jpg");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            font-family: Arial, sans-serif;
+            background-attachment: fixed;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            max-width: 500px;
+            width: 100%;
+            margin: 50px auto;
+            padding: 50px;
+            background-color: rgb(255, 255, 255, 0.35);
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .return-btn {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-bottom: 20px;
+        }
+
+        .return-btn:hover {
+            background-color: #0056b3;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            font-size: 16px;
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+            background-color: rgb(255, 255, 255, 0.55);
+        }
+
+        .action-buttons {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .action-buttons button {
+            width: 48%;
+            padding: 10px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .sign-in-btn {
+            background-color: #007bff;
+            color: white;
+        }
+
+        .sign-in-btn:hover {
+            background-color: #0056b3;
+        }
+
+        .cancel-btn {
+            background-color: #e6e6e6;
+            color: #333;
+        }
+
+        .cancel-btn:hover {
+            background-color: #ccc;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+<!--    <button th:action="@{/login}" class="return-btn">Return</button>-->
+    <h2>Sign in</h2>
+    <form th:action="@{/register}" method="POST" onsubmit="return validateForm()">
+        <div class="form-group">
+            <label for="name">Name:</label>
+            <input type="text" id="email" name="email" placeholder="" required />
+        </div>
+        <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="email" id="name" name="name" placeholder="" required />
+        </div>
+        <div class="form-group">
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" placeholder="" required />
+        </div>
+        <div class="form-group">
+            <label for="verify-password">Verify Password:</label>
+            <input type="password" id="verify-password" name="verify-password" placeholder="" required />
+        </div>
+        <div class="action-buttons">
+            <button type="submit" class="sign-in-btn">Sign in</button>
+            <button type="button" class="cancel-btn" onclick="window.location.href='/'">Cancel</button>
+        </div>
+    </form>
+</div>
+</body>
+</html>

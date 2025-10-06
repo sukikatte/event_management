@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Venues - Organiser</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #f8f9fa;
+            padding: 15px 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            font-size: 1.1rem;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav ul li {
+            margin: 0 15px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: #000;
+            font-weight: bold;
+            padding: 10px 15px;
+        }
+
+        nav ul li a.active {
+            color: #007bff;
+            border-bottom: 2px solid #007bff;
+        }
+
+        nav .search-form {
+            display: flex;
+            align-items: center;
+        }
+
+        nav .search-form input {
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-right: 10px;
+            font-size: 1rem;
+        }
+
+        nav .search-form button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        nav .search-form button:hover {
+            background-color: #0056b3;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 0 20px;
+        }
+
+        .new-venue-btn {
+            background-color:  #007bff;
+            color: white;
+            padding: 15px 30px;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            margin-top: 20px;
+            display: inline-block;
+        }
+
+        .new-venue-btn:hover {
+            background-color:#0056b3;
+        }
+
+        .venues-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .venue-card {
+            background-color: #e9ecef;
+            border: 1px solid #dee2e6;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 200px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            text-align: center;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Profile</a></li>
+        <li><a href="#">My Events</a></li>
+        <li><a href="#" class="active">Venues</a></li>
+    </ul>
+    <form class="search-form">
+        <input type="text" placeholder="Search venues..." aria-label="Search">
+        <button type="submit">Search</button>
+    </form>
+</nav>
+
+<main class="container">
+    <button class="new-venue-btn">New Venue</button>
+
+    <section class="venues-grid">
+        <div class="venue-card">Venue 1 Name</div>
+        <div class="venue-card">Venue 2 Name</div>
+        <div class="venue-card">Venue 3 Name</div>
+        <div class="venue-card">Venue 4 Name</div>
+        <div class="venue-card">Venue 5 Name</div>
+        <div class="venue-card">Venue 6 Name</div>
+        <div class="venue-card">Venue 7 Name</div>
+        <div class="venue-card">Venue 8 Name</div>
+    </section>
+</main>
+</body>
+</html>

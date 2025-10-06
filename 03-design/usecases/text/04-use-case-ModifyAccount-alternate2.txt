@@ -1,0 +1,143 @@
+title Sequence Diagram: 04 Modify Account Alternative: Overlap with Existing Account
+
+actor "Adaministrator/Organizer/User" as u
+image data:image/png;base64,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 "Web Browser" as w
+boundary "<link:_>newView : View " as nv
+boundary "<link:_>nv2 : View " as nv2
+boundary "<link:_>: DispatchServlet" as d
+entity "<link:_>m : Model" as m
+entity "<link:_>m2 : Model" as m2
+
+control "<link:_>: AccountController" as vc
+
+entity "<link:_>accdto : ModifyAccountDTO" as vdto
+
+entity "<link:_>edto : ErrorMessageDTO" as edto
+
+participant "<link:_> : AdministratorRepository" as ar
+participant "<link:_> : OrganizerRepository" as or
+participant "<link:_> : UserRepository" as ur
+
+participant "<link:_>: AccountService" as vs
+
+entity "<link:_>acc: Account" as v
+
+
+==1. The administrator/organizer/user selects the modify account functionality on the view account page **(06-view-account)**==
+
+
+u -> w: click()
+activate w
+
+w->d:GET(url : String, data : JSON)
+activate d
+
+d->vc:modifyAccount(accountId: long m : Model)
+activate vc
+
+vc -> vs:acc: getAccount(accountId: long)
+activate vs
+
+vs -> ar : acc:= findAccountById(accountId: long)
+
+alt the value acc is null
+vs -> or : acc:= findAccountById(accountId: long)
+end
+
+alt the value acc is null
+vs -> ur : acc:= findAccountById(accountId: long)
+end
+
+vs --> vc: return acc
+deactivate vs
+
+
+vc->m: addAttribute("account" : String, acc : Account)
+
+vc->*vdto: ModifyAccountDTO()
+activate vdto
+
+vdto-->vc:
+deactivate vdto
+vc->m: addAttribute("accDTO" : String, accDTO : ModifyAccountDTO)
+
+vc-->d:return "modify-account" **(12-view&modify-account-admin-admin & 16-profile-admin & 21-profile-organiser & 08-profile-user)**
+
+deactivate vc
+d->*nv:View(model : Model)
+activate nv
+
+
+nv-->d:
+deactivate nv
+
+d-->w:return newView
+deactivate d
+
+==2. The system displays the modify venue page which shows the details of the selected venue as editable fields **(12-view&modify-account-admin-admin & 16-profile-admin & 21-profile-organiser & 08-profile-user)**\n3. The Administrator/Organizer/User enters the updated details of the venue==
+
+u -> w: click()
+
+w->d:POST(url : String, data : JSON)
+activate d
+
+d->vc:modifyAccount(accdto : ModifyAccountDTO, m2 : Model)
+
+activate vc
+
+vc -> vs:acc := getAccount(accEmail : String)
+activate vs
+
+vc -> vs: modifyAccount(accDTO : ModifyAccountDTO, acc : Account)
+
+vs->ar:isExisting(newEmail: String)
+activate ar
+
+ar-->vs:return true
+deactivate ar
+
+alt the value acc is null
+vs -> or : isExisting(newEmail: String)
+activate or
+or-->vs:return true
+deactivate or
+end
+
+alt the value acc is null
+vs -> ur : isExisting(newEmail: String)
+activate ur
+ur-->vs: return true
+deactivate ur
+end
+
+
+
+vs->*edto:ErrorMessageDTO(ErrorType.EMAIL_USED, message : String)
+activate edto
+
+edto-->vs:
+deactivate edto
+
+vs->vc:
+deactivate vs
+
+vc->m2: addAttribute("account" : String, acc : Account)
+vc->m2:addAttribute("errorDTO" : String, edto : ErrorMessageDTO)
+
+
+vc-->d:return "account-detials-alter-error" (**26 - modify - account - error**)
+deactivate vc
+d->*nv2:View(m2 : Model)
+activate nv2
+
+
+nv2-->d:
+deactivate nv2
+
+d-->w:return nv2
+deactivate d
+
+==4. The system warns the administrator/organizer/user that the alteration of this change if changed would overlap with another existing account. (**26 - modify - account - error**)\n5. The administrator/organizer/user clicks **Cancel**==
+
+note over w,d:This part of the functionality is completed in Javascript\nIt does not need to be shown here
+==6. The system returns to the view account page **(06-view-account)**==

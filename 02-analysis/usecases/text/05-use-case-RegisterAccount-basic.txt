@@ -1,0 +1,28 @@
+title Sequence Diagram: 05 Register Account
+actor "User" as a
+control "<link:_>: AccountController" as c
+participant "<link:_>: AccountService" as s
+entity "<link:_>: User" as u
+
+
+==1. The user selects the “Sign in as user” on login page **(00-login)**\n2. The system displays the registration page of the system **(07-sign-user)**\n3. The user enters the required details to create an account and clicks "Register"==
+
+a-> c : addAccount(details)
+activate c
+c -> s : addAccount(details)
+activate s
+
+s -> u : User(name, password, email)
+activate u
+u --> s : Return new User account
+deactivate u
+s --> c : Return User account
+c -> c : updateDisplay()
+c-->a:use case finished!
+
+deactivate s
+
+
+deactivate c
+
+==4. The system displays the home page of the system **(03-main-user)**==

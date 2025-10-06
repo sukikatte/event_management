@@ -1,0 +1,32 @@
+title Sequence Diagram: 16 List My Events
+
+actor Organiser
+control "<link:_>: EventController" as system
+participant "<link:_>: EventService" as service
+entity "<link:_>: Event" as event
+
+== The organiser selects the list my events functionality==
+Organiser -> system: requestListMyEvents()  
+activate system
+system -> service: getEventSchedule(email)  
+activate service
+note over service: the getEventSchedule method retrieves all events belong to the organiser  
+service --> system: Return MyEvents 
+system -> system: displayEventSchedule()  
+deactivate service
+system --> Organiser: displayMyEventsPage()  
+deactivate system
+== 2. The system displays all events page (20-events-organiser)\n which shows all the organiser's events to the organiser ==
+
+== 3. The organiser selects the view event functionality to view details of an event==
+Organiser -> system: requestViewEvent(event_id)  
+activate system
+system -> service: getEvent(name)  
+activate service
+note over service: the getEvent method retrieves details of the selected event  
+service --> system: Return EventDetails  
+system -> system: displayEvent()  
+deactivate service
+system --> Organiser: displayViewEventPage()  
+deactivate system
+== 4. The system displays the view event page (18-check-event-organiser)\n which shows the details of the selected event to the organizer ==

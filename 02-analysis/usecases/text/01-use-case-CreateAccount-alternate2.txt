@@ -1,0 +1,8 @@
+title Sequence Diagram: 01 Create Account \n(Alternative Courses of Events -  Invalid Input)
+
+actor "<link:_>Administrator" as Administrator
+
+==1.The administrator selects the create account functionality\n2.The system displays an input form to get the required details (details required are\n based on the type of account being created) - 05-create-account\n3.The administrator enters the details of the account\n4.The system displays an error message indicating that some inputs are invalid\n5.The administrator clicks OK\n6.The system returns to the create account page - 05-create-account==
+   
+note right of Administrator:This part happens in the JavaScript.
+

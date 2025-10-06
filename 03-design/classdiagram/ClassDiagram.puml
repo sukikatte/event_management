@@ -1,0 +1,352 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+namespace model{
+abstract class Account{
+- name : String
+- email : String
+- password : String
+- id : long
+
++ setName(name: String)
++ setEmail(email: String)
++ setPassword(password: String)
++ getId(): long
++ getName(): String
++ getEmail(): String
++ getPassword(): String
+}
+
+
+class Administrator extends Account {
++ {static} Administrator()
++ {static} Administrator(name: String, email: String, password: String)
+}
+
+
+class Organizer extends Account {
+- companyName : String
+- phoneNumber : int
+- address : String
+
++ {static} Organizer()
++ {static} Organizer(name: String, \n email: String, \n password: String, \n companyName: String, \n phoneNumber: String, \n address: String)
++ setAddress(address: String)
++ setCompanyName(companyName: String)
++ setPhoneNumber(phoneNumber: String)
++ getCompanyName(): String
++ getPhoneNumber(): int
++ getAddress(): String
+}
+
+class User extends Account {
++ {static} User()
++ {static} User(name: String, email: String, password: String)
++ getUser(accountId: long): User
+}
+
+class Event {
+- id : long
+- name : String
+- description : String
+- date : LocalDate
+- startTime : LocalTime
+- endTime : LocalTime
+- ticketType: TicketType
+- standingNumberAvailable : int
+- seatingNumberAvailable : int
+- premiumNumberAvailable : int
++ {static} Event()
++ {static} Event(name: String,\n description: String,\n date: LocalDate,\n startTime: LocalTime,\n endTime: LocalTime,\n standingNumberAvailable: int,\n seatingNumberAvailable: int,\n premiumNumberAvailable: int)
++ setName(eventName: String)
++ setDescription(description: String)
++ setDate(date: LocalDate)
++ setStartTime(startTime: LocalTime)
++ setEndTime(startTime: LocalTime)
++ setStandingNumberAvailable(standingNumberAvailable : int)
++ setSeatingNumberAvailable(seatingNumberAvailable : int)
++ setPremiumNumberAvailable(premiumNumberAvailable : int)
++ getId(): long
++ getEvent(eId: long): Event
++ getName(): String
++ getDescription(): String
++ getDate(): LocalDate
++ getStartTime(): LocalTime
++ getEndTime(): LocalTime
++ getTicketType(): TicketType
++ checkStandingNumberAvailable(ticketNum: int): Boolean
++ checkSeatingNumberAvailable(ticketNum: int): Boolean
++ checkPremiumNumberAvailable(ticketNum: int): Boolean
+}
+
+class Ticket {
+- id : long
+- ticketType: TicketType
+- admission: String
++ {static} Ticket()
++ {static} Ticket(u: User, \n e: Event, \n ticketType: TicketType)
++ getId(): long
++ getTicketType(): TicketType
++ getAdmission(): String
+}
+
+class Venue {
+- id : long
+- name : String
+- address : String
+- capacity : int
+- managerName : String
+- managerPhoneNumber : int
+- managerEmail : String
++ {static} Venue()
++ {static} Venue(name: String,\n address: String,\n capacity: Integer,\n managerName: String,\n managerPhoneNumber: Integer,\n managerEmail: String)
++ setName(venueName: String)
++ setAddress(address: String)
++ setCapacity(capacity: Integer)
++ setManagerName(managerName: String)
++ setManagerNumber(managerNumber: Integer)
++ setManagerEmail(managerEmail: String)
++ getId(): long
++ getName(): String
++ getAddress(): String
++ getCapacity(): Integer
++ getManagerName(): String
++ getManagerNumber(): Integer
++ getManagerEmail(): String
+}
+Event <- Organizer : - event *
+Ticket <- User : - ticket *
+Event <- Venue : - schedule *
+Organizer <-- Event : - organizer 1
+Venue <- Event : - venue 1
+Event <---- Ticket : - event 1
+User <- Ticket : - user 1
+Organizer <-- Venue : - organizer*
+Venue <-- Organizer : - venue*
+}
+
+namespace service{
+class AccountService{
++ {static} AccountService(AdministratorRepository, OrganizerRepository, UserRepository)
++ createAdministratorAccount(email: String, name: String, password : String): ErrorType
++ createOrganizerAccount(email: String,\n name: String,\n password : String,\n companyName: String,\n phone_number: String,\n address: String): ErrorType
++ createUserAccount(email: String, name: String, password : String): ErrorType
++ getAccount(accountId: long): Account
++ getAllAccount(accountId: long): Account[*]
+}
+
+class EventService{
++ {static} EventService(EventRepository, VenueRepository, TicketRepository)
++ getVenue(name:String): Venue
++ getVenue(vId: long): Venue
++ getAllVenues(): Venue[*]
++ addVenue(name: String,\n address: String,\n capacity: Integer,\n managerName: String,\n managerPhoneNumber: Integer,\n managerEmail: String)
++ modifyVenue(vdto: ModifyVenueDTO, v: Venue)
++ deleteVenue(v: Venue)
+
++ getAllEvents(): Event[*]
++ getEvent(eId: long): Event
++ getEvent(name: String): Event
++ modifyEvent(edto: ModifyEventDTO, e: Event)
++ deleteEvent(e: Event)
++ getAllEvents(): Event[*]
++ getEventHistory(email: String)
+
++ getTicketsHistory(u: User): Ticket[*]
++ getAvailableTicketsNumber(eId: long, ticketType: TicketType, ticketNum: int): Event
++ getTicket(tId: long): Ticket
++ buyTicket(accountId: long, e: Event, ticketType: TicketType, ticketNum: int)
+}
+}
+
+namespace repositories{
+class UserRepository{
++ findAccountByEmail(email: String): User
++ findAll(): User[*]
++ findAccountById(accountId: long): User
++ save(u: User)
+}
+
+class OrganizerRepository{
++ findAccountByEmail(email: String): Organizer
++ findAll(): Organizer[*]
++ findAccountById(accountId: long): Organizer
++ save(o: Organizer)
+}
+
+class AdministratorRepository{
++ findAccountByEmail(email: String): Administrator
++ findAll(): Administrator[*]
++ findAccountById(accountId: long): Administrator
++ save(a: Administrator)
+}
+
+class EventRepository{
++ findAllEvents(): Event[*]
++ findEventByName(name: String): Event
++ save(e: Event)
++ delete(e: Event)
++ findEventsByAccount(account: Account): Event[*]
++ findEventByEventId(eId: long): Event
+}
+
+class TicketRepository{
++ findTicketByAdmission(admission: String): Ticket
++ findAllTicketsByAccount(account: Account): Ticket[*]
++ findTicketById(tId: long): Ticket
+}
+
+class VenueRepository{
++ findVenueByName(name: String): Venue
++ findVenueById(vId: long): Venue
++ save(v: Venue)
++ delete(v: Venue)
++ findAll(): Venue[*]
+}
+
+namespace controllers{
+class AccountController{
++{static} AccountController(AccountService, EventService)
++ createAdministrator(email : String, name : String, password : String, m : Model)
++ createOrganizer(email : String, name : String, password : String, address: String, companyName: String, phoneNumber: String, m: Model)
++ displayAccount(accountId: long, m: Model)
++ modifyAccount(accountId: long, m: Model)
++ modifyAccount(accdto: ModifyAccountDTO, m: Model)
++ registerAccount(email : String, name : String, password : String, m : Model)
+}
+
+class EventController{
++ {static} EventController(AccountService, EventService)
++ displayVenue(accountId: long, m: Model)
++ addVenue(name: String,\n address: String,\n capacity: Integer,\n managerName: String,\n managerPhoneNumber: Integer,\n managerEmail: String, m: Model)
++ displayVenue(vId: long, m: Model)
++ modifyVenue(vId: long, m: Model)
++ modifyVenue(vdto : ModifyVenueDTO, m: Model)
++ deleteVenue(vId: long, m: Model)
+
++ displayEvent(accountId: String, m:Model)
++ addEvent(name: String,\n description: String,\n date: LocalDate,\n startTime: LocalTime,\n endTime: LocalTime,\n standingNumberAvailable: int,\n seatingNumberAvailable: int,\n premiumNumberAvailable: int,\n m: Model)
++ getAllEvents(): Event[*]
++ modifyEvent(eId: long, m: Model)
++ modifyEvent(edto: ModifyEventDTO, m: Model)
++ deleteEvent(eId: long, m: Model)
++ displayEvent(eId: long, m:Model)
+
++ viewTicketsHistory(accountId: long, m: Model)
++ buyTicket(eId: long, ticketType:TicketType, ticketNum: int, m: Model)
++ buyTicket(accountId: long, eId: long, ticketType: TicketType, ticketNum: int, m: Model)
++ displayTicket(tId: long, m: Model)
+}
+
+ModifyAccountDTO <.. AccountController
+ModifyEventDTO <.. AccountController
+ModifyVenueDTO <. AccountController
+ModifyEventDTO <.... EventController
+ModifyTicketDTO <.. EventController
+ModifyVenueDTO <... EventController
+ErrorMessageDTO <. EventController
+
+
+class ModifyAccountDTO{
+- name : String
+- email : String
+- password : String
++ {static} ModifyAccountDTO()
++ {static} ModifyAccountDTO(name: String, email: String, password: String)
++ {static} ModifyAccountDTO(name: String, email: String, password: String, companyName: String, phoneNumber: String, address: String)
++ getName(): String
++ getEmail(): String
++ getPassword(): String
++ getCompanyName(): String
++ getPhoneNumber(): String
++ getAddress(): String
+}
+
+class ModifyEventDTO{
+- name : String
+- description : String
+- date : LocalDate
+- startTime : LocalTime
+- endTime : LocalTime
+- standingNumberAvailable : int
+- seatingNumberAvailable : int
+- premiumNumberAvailable : int
+
++ {static} EventDTO()
++ {static} EventDTO(name: String, \n description: String, \n date: LocalDate, \n startTime: LocalTime, \n endTime: LocalTime, \n standingNumberAvailable: int, \n seatingNumberAvailable: int, \n premiumNumberAvailable: int)
++ getName(): String
++ getDescription(): String
++ getDate(): LocalDate
++ getStartTime(): LocalTime
++ getEndTime(): LocalTime
++ getStandingNumberAvailable(): int
++ getSeatingNumberAvailable(): int
++ getPremiumNumberAvailable(): int
+}
+
+class ModifyVenueDTO{
+- name : String
+- address : String
+- capacity : int
+- managerName : String
+- managerPhoneNumber : int
+- managerEmail : String
++ {static} VenueDTO()
++ {static} VenueDTO(name: String, \n address: String, \n capacity: int, \n managerName: String, \n managerPhoneNumber: int, \n managerEmail: String)
++ getName(): String
++ getAddress(): String
++ getCapacity(): int
++ getManagerName(): String
++ getManagerPhoneNumber(): int
++ getManagerEmail(): String
+}
+
+class ModifyTicketDTO{
+- admission : String
+- ticketType : TicketType
+- eventName: String
+- userEmail: String
++ {static} TicketDTO()
++ {static} TicketDTO(admission: String,\n ticketType: TicketType,\n eventName: String,\n userEmail: String)
++ getAdmission(): String
++ getTicketType(): TicketType
++ getEventName(): String
++ getUserEmail(): String
+}
+
+class ErrorMessageDTO{
+-type: ErrorType
+-message: String
++ {static} ErrorMessageDTO()
++ {static} ErrorMessageDTO(type: ErrorType, message: String)
++ getType(): ErrorType
+}
+ErrorType <. ErrorMessageDTO
+
+class ErrorType{
+NONE
+EMAIL_USED
+VENUE_OVERLAP
+EVENT_OVERLAP
+NO_TICKET
+}
+
+
+AccountService <----- AccountController : - accountService 1
+EventService <----- AccountController : - eventService 1
+AccountService <----- EventController : - accountService 1
+EventService <---- EventController : - eventService 1
+AdministratorRepository <- AccountService : - administratorRepository 1
+OrganizerRepository <----- AccountService : - organizerRepository 1
+UserRepository <----- AccountService : - userRepository 1
+AdministratorRepository <- EventService : - administratorRepository 1
+VenueRepository <----- EventService : - venueRepository 1
+TicketRepository <----- EventService : - ticketRepository 1
+EventRepository <----- EventService : - eventRepository 1
+Account <. AdministratorRepository: <<import>>
+Account <. OrganizerRepository: <<import>>
+Account <. UserRepository: <<import>>
+Ticket <.. TicketRepository: <<import>>
+Venue <. VenueRepository: <<import>>
+Event <.. EventRepository: <<import>>
+
+@enduml

@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create - Account</title>
+  <style>
+    body {
+      background-image: url("https://gues-songs.oss-cn-beijing.aliyuncs.com/songs/bg1.jpg");
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      font-family: Arial, sans-serif;
+      background-attachment: fixed;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .form-container {
+      background-color: rgb(255, 255, 255, 0.35);
+      padding: 50px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      width: 500px;
+      text-align: center;
+
+    }
+
+    .form-container h2 {
+      margin-bottom: 20px;
+      color: #333;
+    }
+
+    label {
+      display: block;
+      text-align: left;
+      margin-bottom: 5px;
+      font-weight: bold;
+      color: #333;
+    }
+
+    input[type="text"], input[type="email"], input[type="password"] {
+      width: calc(100% - 20px);
+      padding: 10px;
+      margin-bottom: 10px;
+      background-color: rgb(255, 255, 255, 0.55);
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 16px;
+    }
+
+
+    .action-buttons {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 20px;
+    }
+
+    .sign-in-btn,
+    .cancel-btn {
+      padding: 15px 30px;
+      font-size: 16px;
+      font-weight: bold;
+      border-radius: 5px;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
+      width: 220px;
+    }
+
+    .sign-in-btn {
+      background-color: #3391ff;
+      color: white;
+      border: none;
+    }
+
+    .sign-in-btn:hover {
+      background-color: #0056b3;
+      transform: scale(1.05);
+    }
+
+    .cancel-btn {
+      background-color: #888888;
+      color: white;
+      border: none;
+    }
+
+    .cancel-btn:hover {
+      background-color: #4c4c4c;
+      transform: scale(1.05);
+    }
+
+
+
+    .detail-item select {
+      font-size: 16px;
+      padding: 8px;
+      width: 60%;
+      background-color: rgb(255, 255, 255, 0.55);
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      margin-right: 20px;
+    }
+
+    select {
+      font-size: 18px;
+      padding: 8px;
+      width: 100%;
+      background-color: rgb(239, 245, 246);
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      margin-bottom: 20px;
+    }
+
+    select option {
+      background-color: rgb(239, 234, 234);
+      color: #333; /* 选项文字颜色 */
+    }
+
+
+  </style>
+</head>
+<body>
+
+<div class="form-container">
+  <h2>Create Account</h2>
+  <form th:action="@{/createAccount}" method="POST" onsubmit="return validateForm()">
+    <div class="form-group">
+      <label for="identification">Identification:</label>
+      <select id="identification" name="identification" onchange="updateFormAction()">
+        <option value="Admin">Admin</option>
+        <option value="Organizer">Organizer</option>
+        <option value="User">User</option>
+      </select>
+      <input type="hidden" id="accountType" name="accountType" value="Admin" />
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name" placeholder="" required />
+    </div>
+    <div class="form-group">
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" placeholder="" required />
+    </div>
+    <div class="form-group">
+      <label for="password">Password:</label>
+      <input type="password" id="password" name="password" placeholder="" required />
+    </div>
+    <div class="form-group">
+      <label for="verify-password">Verify Password:</label>
+      <input type="password" id="verify-password" name="verify-password" placeholder="" required />
+    </div>
+    <div class="action-buttons">
+      <button type="submit" class="sign-in-btn">Sign in</button>
+      <button type="button" class="cancel-btn" onclick="window.location.href='/'">Cancel</button>
+    </div>
+  </form>
+</div>
+
+<script>
+  function updateFormAction() {
+    document.getElementById("accountType").value = document.getElementById("identification").value;
+  }
+
+
+  function validateForm() {
+    var email = document.getElementById("email").value;
+    var password = document.getElementById("password").value;
+    var verifyPassword = document.getElementById("verify-password").value;
+
+    if (password !== verifyPassword) {
+      alert("Passwords do not match!");
+      return false;
+    }
+
+    //completed email validation
+    //var emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+
+    //simple email validation
+    var emailPattern = /^.+@.+$/;
+    if (!emailPattern.test(email)) {
+      alert("Please enter a valid email address!");
+      return false;
+    }
+
+        return true;
+    }
+</script>
+</body>
+</html>

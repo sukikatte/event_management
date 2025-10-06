@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accounts Page</title>
+    <style>
+
+        body {
+            background-image: url("https://gues-songs.oss-cn-beijing.aliyuncs.com/songs/bg2.jpg");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: rgb(0, 31, 134, 0.6);
+            padding: 15px 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            font-size: 1.3rem;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            flex-grow: 1;
+        }
+
+        nav ul li {
+            flex: 1;
+            margin: 0;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: #ffffff;
+            font-weight: bold;
+            padding: 15px 20px;
+            display: block;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        nav ul li a:hover {
+            border-bottom: 3px solid rgb(12, 198, 255);
+            color: #64c4ed;
+            transform: translateY(-2px);
+        }
+
+        nav ul li a.active {
+            color: #ffffff;
+            background-color: rgb(100, 196, 237, 0.56);
+        }
+
+        nav ul li a.active:hover {
+            background-color: transparent;
+            color: #0d77f4;
+        }
+
+
+
+        nav .search-form {
+            display: flex;
+            align-items: center;
+        }
+
+        nav .search-form input {
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-right: 10px;
+            font-size: 1rem;
+
+        }
+
+        nav .search-form button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        nav .search-form button:hover {
+            background-color: #0056b3;
+        }
+
+        /* 搜索和按钮区域样式 */
+        .search-section {
+            display: flex;
+            padding: 20px;
+            background-color: rgba(103, 81, 239, 0);
+            margin-bottom: 10px;
+        }
+
+        .search-section input[type="text"]{
+            background-color: rgba(255, 254, 254, 0.75);
+            width: 560px;
+            height: 35px;
+            border-radius: 5px;
+            border: #001f86;
+            margin-top: 2px;
+            margin-left: 20px;
+            margin-right: 20px;
+            color: #ffffff;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        select option {
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .search-section select,
+        .search-section button {
+            background-color: rgb(255, 177, 37);
+            height: 40px;
+            padding: 10px;
+            font-size: 16px;
+            font-weight: bold;
+            color: #ffffff;
+            border: 1px solid #d15f0d;
+            border-radius: 5px;
+            margin-left: 20px;
+            margin-right: 20px;
+        }
+
+        .search-section button {
+            background-color: #007bff;
+            transition: background-color 0.3s ease;
+            padding: 10px 30px;
+            border: none;
+            border-radius: 8px;
+            font-size:  16px;
+            cursor: pointer;
+            color: white;
+            font-weight: bold;
+            margin-left: 30px;
+            margin-right: 30px;
+        }
+
+        .search-section button:hover {
+            background-color: #0056b3;
+        }
+
+        /* 账号卡片容器样式 */
+        .accounts-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            padding: 20px;
+        }
+
+        /* 单个账号卡片样式 */
+        .account-card {
+            display: flex;
+            align-items: center;
+            padding: 20px;
+            background-color: white;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .account-card img {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            margin-right: 15px;
+            background-color: #007bff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 30px;
+            font-weight: bold;
+        }
+
+        .account-details {
+            font-size: 16px;
+            line-height: 1.5;
+        }
+
+        .account-details strong {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .account-role {
+            display: block;
+            margin-top: 5px;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+
+<!--&lt;!&ndash; 顶部导航栏 &ndash;&gt;-->
+
+<!--<nav>-->
+<!--    <ul>-->
+<!--        <li><a href="#">Events</a></li>-->
+<!--        <li><a th:href="@{/adminProfile}" >Profile</a></li>-->
+<!--        <li><a href="#">Venues</a></li>-->
+<!--        <li><a href="#" class="active">Accounts</a></li>-->
+<!--    </ul>-->
+<!--</nav>-->
+
+<!--&lt;!&ndash; 搜索区域 &ndash;&gt;-->
+<!--<div class="search-section">-->
+<!--    <select>-->
+<!--        <option value="">Select Identification</option>-->
+<!--        <option value="Admin">Admin</option>-->
+<!--        <option value="Organizer">Organizer</option>-->
+<!--        <option value="User">User</option>-->
+<!--    </select>-->
+<!--    <input type="text" placeholder="input email or user name......">-->
+<!--    <button>Search</button>-->
+<!--    <button>New Account</button>-->
+<!--</div>-->
+
+<!--&lt;!&ndash; 账号卡片区域 &ndash;&gt;-->
+<!--<div class="accounts-grid">-->
+<!--    <div class="account-card">-->
+<!--        <div class="account-icon">-->
+<!--            <img src="#" alt="User Icon" style="background-color: #007bff;">👤-->
+<!--        </div>-->
+<!--        <div class="account-details">-->
+<!--            <strong>Name: XXXX</strong>-->
+<!--            <span>Email: XXXXXXXX@email.com</span>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--    <div class="account-card">-->
+<!--        <div class="account-icon">-->
+<!--            <img src="#" alt="User Icon">👤-->
+<!--        </div>-->
+<!--        <div class="account-details">-->
+<!--            <strong>Name: XXXX</strong>-->
+<!--            <span>Email: XXXXXXXX@email.com</span>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--    &lt;!&ndash; 继续添加更多卡片 &ndash;&gt;-->
+<!--</div>-->
+
+<!-- 顶部导航栏 -->
+<nav>
+    <ul>
+        <li><a th:href="@{/administrator}">Home</a></li>
+        <li><a th:href="@{/adminProfile}">Profile</a></li>
+        <li><a th:href="@{/adminVenues}">Venues</a></li>
+        <li><a href="#" class="active">Accounts</a></li>
+
+    </ul>
+</nav>
+
+<!-- 搜索区域 -->
+<div class="search-section">
+    <form action="/list-accounts" method="GET"> <!-- 设置表单的提交地址 -->
+        <select name="role"> <!-- 设置选择框的name属性 -->
+            <option value="">Select Identification</option>
+            <option value="Admin">Admin</option>
+            <option value="Organizer">Organizer</option>
+            <option value="User">User</option>
+        </select>
+        <input type="text" name="query" placeholder="input email or user name......"> <!-- 设置输入框的name属性 -->
+        <button type="submit">Search</button> <!-- 提交搜索请求 -->
+    </form>
+    <button onclick="location.href='/createAccount'">New Account</button> <!-- 使用JS跳转到创建账户页面 -->
+</div>
+
+<!-- 账号卡片区域 -->
+<div class="accounts-grid">
+    <div th:each="account : ${accounts}" class="account-card">
+        <div class="account-icon">
+            <span>👤</span>
+        </div>
+        <div class="account-details">
+            <strong th:text="${account.name}">Name</strong>
+            <span th:text="${account.email}">Email</span>
+            <span class="account-role" th:text="${account.role}">Role</span> <!-- 添加角色显示 -->
+
+            <a th:href="@{/modifyAccount(email=${account.email})}" class="modify-button">Modify</a>
+        </div>
+    </div>
+</div>
+
+
+</body>
+</html>

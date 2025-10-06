@@ -1,0 +1,38 @@
+title Sequence Diagram: 04 Modify Account (User Modifying Their Own Account)
+
+actor "User" as a
+control "<link:_>:AccountController" as c
+participant "<link:_>:AccountService" as s
+entity User
+
+==1. The user selects the "change" option for either username, email, or password on view account page  **(06-view-account)**\n2. The system displays the modify one of the account detail information which shows the detail as editable fields\n3. The administrator updated detail of the account and clicks save==
+
+a -> c : modifyAccount(details)
+activate c
+c -> s : modifyAccount(details)
+activate s
+
+  alt Modifying name
+      s-> User: setName(name)
+      activate User
+      deactivate User
+
+      else Modifying email
+      s-> User: setEmail(email)
+      activate User
+      deactivate User
+
+      else Modifying password
+      s-> User: setPassword(password)
+      activate User
+      deactivate User
+      end
+      s --> c : Return User account
+      deactivate s
+      c -> c : updateDisplay()
+
+
+c -->a:use case finished!
+deactivate c
+
+==4. The system displays the view account page **(08-profile-user)** with the updated detail of the account==

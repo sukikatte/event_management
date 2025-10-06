@@ -1,0 +1,19 @@
+title  Sequence Diagram: 06 List Venues
+actor Administrator/Organiser
+control "<link:_>: VenueController" as system
+participant "<link:_>: VenueService" as service
+entity "<link:_>v : Venue" as venue
+
+== 1. The administrator or organiser selects the list venues functionality\n to view a list of all venues in the system==
+Administrator/Organiser -> system:requestListVenues()
+activate system 
+system -> service: getVenueList(email)
+activate service
+note over service: the getVenueList method retrieves all venues in the system
+service --> system:return Venues
+system -> system: displayVenueList()  
+deactivate service
+system --> Administrator/Organiser:displayVenuesPage()
+deactivate system
+== 2. The system displays the list venues page (17-list-venues-admin)\n which shows all venues in the system to administrator==
+== 2. The system displays the list venues page (22-venues-organiser)\n which shows all venues in the system to organiser ==

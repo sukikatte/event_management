@@ -1,0 +1,28 @@
+spring:
+  datasource:
+    driverClassName: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://mysql:3306/eventdb
+    username: root
+    password: verysecret
+  jpa:
+    database-platform: org.hibernate.dialect.MySQLDialect
+    hibernate:
+      ddl-auto: update
+  sql:
+    init:
+      mode: always
+  h2:
+    console.enabled: false
+management:
+  endpoint:
+    httpexchanges:
+      enabled: true
+  endpoints:
+    enabled-by-default: true
+    web:
+      exposure:
+        include: "*"
+        exclude: "env,beans"
+  httpexchanges:
+    recording:
+      enabled: true

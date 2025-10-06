@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Main - Admin</title>
+    <style>
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #f8f9fa;
+            padding: 15px 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            font-size: 1.1rem;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            flex-grow: 1;
+        }
+
+        nav ul li {
+            flex: 1;
+            margin: 0;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: #000;
+            font-weight: bold;
+            padding: 15px 20px;
+            display: block;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        nav ul li a:hover {
+            background-color: #e0e7ff;
+            color: #000;
+            transform: translateY(-2px);
+        }
+
+        nav ul li a.active {
+            color: #007bff;
+            border-bottom: 2px solid #007bff;
+        }
+
+        nav ul li a.active:hover {
+            background-color: transparent;
+            color: #007bff;
+        }
+
+        nav .search-form {
+            display: flex;
+            align-items: center;
+        }
+
+        nav .search-form input {
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-right: 10px;
+            font-size: 1rem;
+        }
+
+        nav .search-form button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        nav .search-form button:hover {
+            background-color: #0056b3;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 0 20px;
+        }
+
+        .events-grid a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .events-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .event-card {
+            background-color: #e9ecef;
+            border: 1px solid #dee2e6;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 150px;
+            font-size: 1rem;
+            font-weight: bold;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<!-- 顶部导航栏 -->
+<nav>
+    <ul>
+        <li><a href="#" class="active">Events</a></li>
+        <li><a th:href="@{/adminProfile}" >Profile</a></li>
+        <li><a href="#">Venues</a></li>
+        <li><a href="#">Accounts</a></li>
+    </ul>
+    <form class="search-form">
+        <input type="text" placeholder="Search events..." aria-label="Search">
+        <button type="submit">Search</button>
+    </form>
+</nav>
+
+<!-- 主容器 -->
+<main class="container">
+    <section class="events-grid">
+        <a href="14-check-event-admin.html" class="event-card">Event 1 Name</a>
+        <a href="14-check-event-admin.html" class="event-card">Event 2 Name</a>
+        <a href="14-check-event-admin.html" class="event-card">Event 3 Name</a>
+        <a href="14-check-event-admin.html" class="event-card">Event 4 Name</a>
+        <a href="14-check-event-admin.html" class="event-card">Event 5 Name</a>
+        <a href="14-check-event-admin.html" class="event-card">Event 6 Name</a>
+        <a href="14-check-event-admin.html" class="event-card">Event 7 Name</a>
+        <a href="14-check-event-admin.html" class="event-card">Event 8 Name</a>
+    </section>
+</main>
+
+</body>
+</html>

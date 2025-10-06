@@ -1,0 +1,21 @@
+title Sequence Diagram: 08 View Venue
+
+actor "<link:_> Administrator/Organizer" as Administrator/Organizer
+control "<link:_>: VenueController" as VenueController
+participant "<link:_>: VenueService" as VenueService
+entity "<link:_>v : Venue" as venue
+
+   ==1.The organiser or administrator selects the view venue functionality\n adjacent to the venue they want to view==
+    Administrator/Organizer->>VenueController: viewVenueDetail()
+    activate VenueController
+    VenueController->>VenueService: getVenue(name)
+    activate VenueService
+note over VenueService:The getVenue Method is a service method\n that retrieves a Venue object by name.
+    VenueService-->>VenueController: Return Venue
+    deactivate VenueService
+    VenueController ->> VenueController:UpdateVenueDetail()
+    VenueController-->>Administrator/Organizer: viewVenueDetail()
+   
+    deactivate VenueController
+    
+    ==2.The system displays the view venue page (13-check-venue-admin, 23-check-venues-organiser)\n with the details of the venue==

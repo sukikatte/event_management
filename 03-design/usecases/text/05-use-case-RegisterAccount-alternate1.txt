@@ -1,0 +1,11 @@
+title Sequence Diagram: 05 Register Account (Alternate 1: Courses of Events - Invalid Input)
+actor "User" as a
+
+
+note right of a:This part happens in the JavaScript.
+
+==1. The user selects the create account functionality\n2. The system displays an input form to get the required details (details required are based on the type of account being created) (02-sign-user)\n3. The user enters the details of the account\n4. The system displays an error message indicating that some inputs are invalid\n5. The user clicks OK\n6. The system returns to the create account page (02-sign-user)==
+
+
+
+

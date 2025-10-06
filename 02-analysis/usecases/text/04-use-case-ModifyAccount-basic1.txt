@@ -1,0 +1,97 @@
+title Sequence Diagram: 04 Modify Account (Administrator Modifying Other Accounts)
+
+actor "Administrator" as a
+control "<link:_>:AccountController" as c
+participant "<link:_>:AccountService" as s
+entity Administrator
+
+entity Organizer
+entity User
+
+==1. The administrator selects the "change" option for either username, email, or password on view account page **(06-view-account)** \n2. The system displays the modify one of the account detail information which shows the detail as editable fields\n3. The administrator enters the updated detail of the account and clicks save==
+
+a -> c : modifyAccount(details)
+activate c
+c -> s : modifyAccount(details)
+activate s
+s -> s : acc:=getAccount(details)
+
+alt Modifying an Administrator Account
+
+    alt Modifying name
+    s-> Administrator: setName(name)
+    activate Administrator
+    deactivate Administrator
+    
+    else Modifying email
+    s-> Administrator: setEmail(email)
+    activate Administrator
+    deactivate Administrator
+    
+    else Modifying password
+    s-> Administrator: setPassword(password)
+    activate Administrator
+    deactivate Administrator
+    end
+    s --> c : Return Admin account
+    c -> c : updateDisplay()
+else Modifying an Organizer Account
+  alt Modifying name
+      s-> Organizer: setName(name)
+      activate Organizer
+      deactivate Organizer
+
+      else Modifying email
+      s-> Organizer: setEmail(email)
+      activate Organizer
+      deactivate Organizer
+
+      else Modifying password
+      s-> Organizer: setPassword(password)
+      activate Organizer
+      deactivate Organizer
+      
+      else Modifying Company Name
+      s-> Organizer: setCompanyName(companyName)
+      activate Organizer
+      deactivate Organizer
+      
+      else Modifying telephone
+      s-> Organizer:setPhoneNumber(telephone)
+      activate Organizer
+      deactivate Organizer
+      
+      else Modifying address
+      s-> Organizer: setAddress(address)
+      activate Organizer
+      deactivate Organizer
+      end
+      s --> c : Return Organizer account
+    
+c->c:updateDisplay()
+else Modifying an User Account
+  alt Modifying name
+      s-> User: setName(name)
+      activate User
+      deactivate User
+
+      else Modifying email
+      s-> User:setEmail(email)
+      activate User
+      deactivate User
+
+      else Modifying password
+      s-> User: setPassword(password)
+      activate User
+      deactivate User
+      end
+      s --> c : Return User account
+      c -> c : updateDisplay()
+
+end
+deactivate s
+
+c-->a:use case finished!
+deactivate c
+
+==4. The system displays the view account page **(06-view&modify-account-admin-user, 12-view&modify-account-admin-admin, 15-view&modify-account-admin-organiser)** with the updated detail of the account==

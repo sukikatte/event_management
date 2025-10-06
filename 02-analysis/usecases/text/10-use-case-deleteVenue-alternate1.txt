@@ -1,0 +1,41 @@
+title Sequence Diagram: 10 Delete Venue (Alternate Course of Events - Not Confirmed)
+
+actor Administrator
+control ":VenueController" as VenueController
+control ":VenueService" as VenueService
+
+== 1. The administrator selects the delete venue functionality adjacent to the venue they want to remove on the list venues page ==
+
+Administrator -> VenueController: deleteVenue()
+activate VenueController
+VenueController -> VenueService: getVenue(name)
+
+activate VenueService
+
+note over VenueController: The checkIfVenueExists method checks \n if the venue exists before deletion
+
+VenueService --> VenueController: return TRUE
+deactivate VenueService
+
+
+VenueController -> VenueService: deleteVenue()
+activate VenueService
+
+note over VenueController: The deleteVenue method deletes the selected \n venue from database if the venue exists
+
+VenueService --> VenueController: return NONE
+deactivate VenueService
+
+note right of VenueController: This part happens in the JavaScript.
+
+VenueController -> Administrator: return delete warning
+
+== 2. The system asks the administrator to confirm the deletion of the venue (13-delete-venue-warning) ==
+
+
+== 3. The administrator clicks Cancel \n 4. The system returns to the list venues page (17-list-venues-admin) with no changes ==
+
+
+VenueController -> Administrator: return to the list venues page (17-list-venues-admin)
+deactivate VenueController
+

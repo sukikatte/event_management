@@ -1,0 +1,24 @@
+title Sequence Diagram: 13 View Event (Administrator, Organiser or User Viewing an Upcoming Event Details)
+
+actor Administrator/ Organizer/ User
+control ":EventController" as EventController
+control ":EventService" as EventService
+entity "e: Event" as Event
+
+== 1. The administrator or the organiser or the user selects the view event functionality adjacent to the event they want to view ==
+
+Administrator/ Organizer/ User -> EventController: viewEventDetail()
+activate EventController
+EventController -> EventService: getEvent(name)
+activate EventService
+
+
+EventService --> EventController: return event
+deactivate EventService
+
+EventController -> EventController: displayEventDetailsPage()
+
+EventController --> Administrator/ Organizer/ User: use case finished!
+deactivate EventController
+
+== 2. The system displays the view event page (14-check-event-admin, 18-check-event-organiser, 11-check-tickets) with the details of the event ==

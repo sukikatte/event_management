@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Administrator Profile</title>
+    <style>
+        body {
+            background-image: url("https://gues-songs.oss-cn-beijing.aliyuncs.com/songs/bg1.jpg");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            font-family: Arial, sans-serif;
+            background-attachment: fixed;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .profile-container {
+            background-color: rgba(255, 255, 255, 0.35);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 800px;
+            height: 400px;
+        }
+
+        .left-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .image-placeholder {
+            width: 150px;
+            height: 150px;
+            background-color: #e0e0e0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+        }
+
+        .btn-image {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-image:hover {
+            background-color: #0056b3;
+        }
+
+        .right-section {
+            flex: 1;
+            margin-left: 20px;
+        }
+
+        .form-group {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            flex: 0 0 120px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .form-group input {
+            flex: 1;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-right: 10px;
+            background-color: rgba(255, 255, 255, 0.35);
+        }
+
+        .button-group {
+            display: flex;
+            justify-content: space-between;
+            padding-left: 80px;
+            padding-right: 80px;
+        }
+
+        .btn-save {
+            margin-top: 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-save:hover {
+            background-color: #0056b3;
+        }
+
+        .btn-delete {
+            margin-top: 20px;
+            background-color: #dc3545;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-delete:hover {
+            background-color: #a71d2a;
+        }
+
+        .btn-return {
+            position: absolute;
+            top: 40px;
+            left: 60px;
+            padding: 16px 28px;
+            background-color: #0056b3;
+            color: white;
+            font-size: 20px;
+            font-weight: bold;
+            text-decoration: none;
+            border-radius: 5px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .btn-return:hover {
+            background-color: #ffc400;
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+
+<a th:href="@{/list-accounts}" class="btn-return">Return</a>
+
+<div class="profile-container">
+    <form th:action="@{/showAccount}" method="post" onsubmit="setUserEmail()">
+        <div class="left-section">
+            <div class="image-placeholder">
+                <span>Image</span>
+            </div>
+            <button type="button" class="btn-image">Change Image</button>
+        </div>
+        <div class="right-section">
+            <div class="form-group">
+                <label for="administratorname"> Name:</label>
+                <input type="text" id="administratorname" name="administratorname" th:value="${account.name}" placeholder="Enter administrator name" required />
+            </div>
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" th:value="${account.email}" readonly style="border: none; background: transparent; color: black; font-weight: bold;" />
+            </div>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" placeholder="Leave blank to retain current password" />
+            </div>
+            <input type="hidden" id="currentUserEmail" name="currentUserEmail" />
+            <input type="hidden" th:name="id" th:value="${account.id}" />
+            <div class="button-group">
+                <button type="submit" class="btn-save">Save</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<script>
+    function setUserEmail() {
+        document.getElementById("currentUserEmail").value = document.getElementById("email").value; // 将email值填充到隐藏字段中
+    }
+</script>
+
+</body>
+</html>

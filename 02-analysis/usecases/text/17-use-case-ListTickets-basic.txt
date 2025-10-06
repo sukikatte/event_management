@@ -1,0 +1,26 @@
+title Sequence Diagram: 17 List Tickets
+
+
+actor "<link:_>User" as u
+control "<link:_>: TicketController" as c
+
+participant "<link:_>:TicketService" as s
+
+== 1. The user selects “Tickets” from the home page menu.==
+u -> c: viewTicketsHistory()
+activate c
+
+== 2. The system displays all tickets for events purchased by the user (past and future). ==
+
+
+c->s:getTicketsHistory(email)
+activate s
+note over s: use the user email as a parameter \nto call getTicketsHistory(email) to \nretrieve all ticketing information \nassociated with this user account
+s --> c:return Ticket[*]
+deactivate s
+
+c->c:updateDisplay()
+note over c: Show users all tickets \ninformation
+c --> u:Display tickets list
+deactivate c
+

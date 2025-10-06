@@ -1,0 +1,23 @@
+title Sequence Diagram: 11 List Events  
+
+actor Administrator/Organiser/User
+
+control "<link:_>: EventController" as system
+participant "<link:_>: EventService" as service
+entity "<link:_>: Event" as event
+
+== 1. The administrator/organiser/user selects the list events functionality\n to view all upcoming events ==
+
+Administrator/Organiser/User -> system:requestListEvents()  
+activate system
+system -> service: getEventSchedule(email)  
+activate service
+note over service: the getEventSchedule method retrieves all upcoming events
+service --> system:Return Events  
+system -> system: displayEventSchedule()  
+deactivate service
+system --> Administrator/Organiser/User: displayEventsPage()  
+deactivate system
+== 2. The system displays all events page (01-main-admin)\n which shows all upcoming events to administrator==
+== 2. The system displays all events page (02-main-organiser)\n which shows all upcoming events to organiser==
+== 2. The system displays all events page (03-main-user)\n which shows all upcoming events to user==

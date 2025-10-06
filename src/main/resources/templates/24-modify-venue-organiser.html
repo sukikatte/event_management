@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modify Venue - Organiser</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f4f8;
+        }
+        .container {
+            width: 60%;
+            margin: 40px auto;
+            padding: 20px;
+            background-color: #dceeff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 28px;
+            color: #333;
+        }
+        h2 {
+            margin: 5px 0;
+            font-size: 18px;
+        }
+        .venue-details {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+        }
+        .detail-section, .contact-section {
+            flex: 1;
+        }
+        .detail-item {
+            margin: 15px 0;
+            font-size: 18px;
+        }
+        .contact-info {
+            margin-top: 10px;
+            padding-left: 20px;
+        }
+        .contact-info .detail-item strong {
+            color: #808080;
+            font-weight: bold;
+        }
+        .buttons {
+            margin-top: 20px;
+            text-align: center;
+        }
+        .buttons a {
+            text-decoration: none;
+            color: white;
+            padding: 15px 30px;
+            border-radius: 5px;
+            margin: 15px;
+            display: inline-block;
+            font-size: 18px;
+            transition: all 0.3s ease;
+            font-weight: bold;
+            width: 150px;
+            text-align: center;
+        }
+        .btn-return {
+            background-color: #007bff;
+        }
+        .btn-return:hover {
+            background-color: #0056b3;
+            transform: scale(1.05);
+        }
+        .btn-save {
+            background-color: #28a745;
+        }
+        .btn-save:hover {
+            background-color: #218838;
+            transform: scale(1.05);
+        }
+        .btn-edit {
+            background-color: #007bff;
+        }
+        .btn-edit:hover {
+            background-color: #0056b3;
+            transform: scale(1.05);
+        }
+        .btn-cancel {
+            background-color: #dc3545;
+        }
+        .btn-cancel:hover {
+            background-color: #c82333;
+            transform: scale(1.05);
+        }
+        h2 {
+            margin: 15px 0;
+            font-size: 18px;
+        }
+        input[type="text"], select {
+            font-size: 16px;
+            padding: 8px;
+            width: 80%;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-right: 20px;
+        }
+        .change-btn {
+            background-color: #ffc107;
+            color: #fff;
+            padding: 6px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        .change-btn:hover {
+            background-color: #e0a800;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <div class="venue-details">
+        <!-- Venue Details Section -->
+        <div class="detail-section">
+            <div class="detail-item">
+                <strong>Venue Name:</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <button class="change-btn" onclick="editField('venue-name')">Change</button>
+                <input type="text" id="venue-name" value="XXX">
+            </div>
+            <div class="detail-item">
+                <strong>Address:</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <button class="change-btn" onclick="editField('address')">Change</button>
+                <input type="text" id="address" value="XXX">
+            </div>
+            <div class="detail-item">
+                <strong>Total Classification:</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <button class="change-btn" onclick="editField('classification')">Change</button>
+                <input type="text" id="classification" value="XXX">
+            </div>
+            <div class="detail-item">
+                <strong>Price Classification:</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <button class="change-btn" onclick="editField('price-classification')">Change</button>
+                <input type="text" id="price-classification" value="XXX">
+            </div>
+        </div>
+
+        <!-- Contact Section moved to the right -->
+        <div class="contact-section">
+            <h2><strong>Local Contact:</strong></h2>
+            <div class="contact-info">
+                <div class="detail-item">
+                    <strong>Name:</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <button class="change-btn" onclick="editField('contact-name')">Change</button>
+                    <input type="text" id="contact-name" value="XXX">
+                </div>
+                <div class="detail-item">
+                    <strong>Phone Number:</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <button class="change-btn" onclick="editField('contact-phone')">Change</button>
+                    <input type="text" id="contact-phone" value="XXX">
+                </div>
+                <div class="detail-item">
+                    <strong>Email:</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <button class="change-btn" onclick="editField('contact-email')">Change</button>
+                    <input type="text" id="contact-email" value="XXX">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Buttons Section -->
+    <div class="buttons">
+        <a href="#" class="btn-return">Return</a>
+        <a href="#" class="btn-save" id="save-btn" style="display:none;" onclick="saveChanges()">Save</a>
+        <a href="#" class="btn-cancel" onclick="cancelChanges()">Cancel</a>
+    </div>
+</div>
+
+<script>
+    function editField(field) {
+        // Show the input field and allow editing
+        document.getElementById(field).disabled = false;
+        document.getElementById('save-btn').style.display = 'inline-block';
+    }
+
+    function saveChanges() {
+        // Save changes and update the displayed values
+        const fields = ['venue-name', 'address', 'classification', 'price-classification', 'contact-name', 'contact-phone', 'contact-email'];
+        fields.forEach(function(field) {
+            let inputField = document.getElementById(field);
+            if (inputField) {
+                inputField.disabled = true;
+            }
+        });
+        document.getElementById('save-btn').style.display = 'none';
+    }
+
+    function cancelChanges() {
+        // Cancel changes and reset the fields
+        const fields = ['venue-name', 'address', 'classification', 'price-classification', 'contact-name', 'contact-phone', 'contact-email'];
+        fields.forEach(function(field) {
+            let inputField = document.getElementById(field);
+            if (inputField) {
+                inputField.value = "XXX";
+                inputField.disabled = true;
+            }
+        });
+        document.getElementById('save-btn').style.display = 'none';
+    }
+</script>
+
+</body>
+</html>

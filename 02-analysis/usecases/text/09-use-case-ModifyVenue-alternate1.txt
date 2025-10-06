@@ -1,0 +1,28 @@
+title Sequence Diagram: 09 Modify Venue (Alternate Course of Events - The Organiser Not Save)
+actor organiser
+control "<link:_>: VenueController" as venueController
+participant "<link:_>: VenueService" as venueService
+entity "<link:_>v: Venue" as venue
+== 1. The organiser selects the edit venue functionality adjacent to the venue they want to view on the list venues page or at the view venue page\n2. The system displays the add and modify venue page (24-modify-venue-organiser) page\n3. The organiser modifies the details of the venue==
+
+organiser -> venueController: modifyVenue(details)
+activate venueController
+venueController -> venueService: modifyVenue(details)
+activate venueService
+venueService -> venueService: getOrganiser(details)
+activate venueService
+venueService --> venueService: return o
+deactivate venueService
+note over venueService: The getOrganiser method is a standin for\nthe future operation of retrieving the organiser\n with the correct details from database
+
+
+==3. The organiser modifies the details of the venue，but clicks Cancel==
+organiser -> venueController: cancelModify()
+venueController -> venueService:cancelModify()
+
+note over venueService: The cancelModify() method will cancel the modification of the venue
+venueService --> venueController: displayVenue(details)
+deactivate venueService
+venueController --> organiser: displayVenueScedule("22-venues-organiser")
+deactivate venueController
+==4. The system returns to the list venues page (22-venues-organiser)==

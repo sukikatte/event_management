@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org" lang="en" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+<head>
+  <meta charset="UTF-8">
+  <title>Login</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+
+    body {
+      background-image: url("https://gues-songs.oss-cn-beijing.aliyuncs.com/songs/bg1.jpg");
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      font-family: Arial, sans-serif;
+      background-attachment: fixed;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .container {
+      max-width: 500px;
+      width: 100%;
+      margin: 50px auto;
+      padding: 50px;
+      background-color: rgb(255, 255, 255, 0.35);
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .sign-in-as-user {
+      float: right;
+      color: #3b83f6;
+      font-size: 1.1rem;
+      text-decoration: none;
+    }
+
+    h1 {
+      font-size: 1.8rem;
+      text-align: center;
+      color: #3b83f6;
+      margin-bottom: 20px;
+    }
+
+    .form {
+      margin-top: 20px;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    label {
+      font-size: 1rem;
+      font-weight: bold;
+      color: #333;
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    input,
+    select {
+      width: 100%;
+      padding: 10px;
+      font-size: 1rem;
+      background-color: rgb(255, 255, 255, 0.55);
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      box-sizing: border-box;
+    }
+
+    input::placeholder {
+      color: #888;
+      font-size: 0.9rem;
+    }
+
+    .action-buttons {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 20px;
+    }
+
+    .btn-login,
+    .btn-cancel {
+      padding: 15px 30px;
+      font-size: 16px;
+      font-weight: bold;
+      border-radius: 5px;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
+      width: 220px;
+    }
+
+    .btn-login {
+      background-color: #3391ff;
+      color: white;
+      border: none;
+    }
+
+    .btn-login:hover {
+      background-color: #0056b3;
+      transform: scale(1.05);
+    }
+
+    .btn-cancel {
+      background-color: #888888;
+      color: white;
+      border: none;
+    }
+
+    .btn-cancel:hover {
+      background-color: #4c4c4c;
+      transform: scale(1.05);
+    }
+
+  </style>
+</head>
+<body>
+<main class="container">
+  <div th:if="${modifySuccess}" class="alert alert-success">
+    successful changing!!!
+  </div>
+  <h1>Login</h1>
+  <!-- Sign in as user button -->
+  <a th:href="@{/register}" class="sign-in-as-user">Sign in as user</a>
+  <form th:action="@{/authenticate}" method="post" class="form">
+    <!-- Role Selection -->
+    <!-- Email Field -->
+    <div class="form-group">
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="username" placeholder="Enter your email" required />
+    </div>
+    <!-- Password Field -->
+    <div class="form-group">
+      <label for="password">Password:</label>
+      <input type="password" id="password" name="password" placeholder="Enter your password" required />
+    </div>
+    <!-- Buttons -->
+    <div class="action-buttons">
+      <input class="btn-login" type="submit" value="Login" />
+      <button class="btn-cancel" type="button" onclick="window.location.href='/'">Cancel</button>
+    </div>
+  </form>
+</main>
+</body>
+</html>

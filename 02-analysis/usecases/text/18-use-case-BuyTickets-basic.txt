@@ -1,0 +1,30 @@
+title Sequence Diagram: 18 Buy Tickets 
+
+actor "<link:_>User" as u
+control "<link:_>: TicketController" as c
+participant "<link:_>:EventService" as s
+entity "<link:_>:Event" as e
+
+
+== 1. The user selects options like date, time, price, and ticket quantity \n 2. The system notifies the user that tickets are currently available ==
+
+u -> c: buyTicket(admission)
+activate c
+
+c -> s: getEvent(name)
+activate s
+s -> e: getEvent(name)
+activate e
+
+note over e: The getEvent(name) method \nchecks whether there are tickets available for \npurchase for that event.
+e -->s: return SeatingNumberAvailable != 0
+deactivate e
+
+s --> c: return Event
+deactivate s
+
+note over c: The system notifies the user that \ntickets are available
+note right of u:This part happens in the JavaScript.
+== 3. If tickets are available, the user can click the "Pay" button to make a purchase ==
+c -->u: return tickets
+deactivate c

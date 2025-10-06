@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Check Event - Organiser</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f4f8;
+        }
+        .container {
+            width: 60%;
+            margin: 40px auto;
+            padding: 20px;
+            background-color: #dceeff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 28px;
+            color: #333;
+        }
+        h2 {
+            margin: 5px 0;
+            font-size: 18px;
+        }
+        .event-details {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+        }
+        .event-info, .description {
+            flex: 1;
+        }
+        .description {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .description img {
+            width: 100%;
+            max-width: 150px;
+            height: 200px;
+            object-fit: cover;
+            border: 2px dashed #007bff;
+            border-radius: 8px;
+            background-color: #e0e0e0;
+        }
+        .description p {
+            font-size: 18px;
+            color: #333;
+            font-weight: bold;
+            margin-top: 15px;
+        }
+        .detail-text {
+            text-align: center;
+            margin-top: 5px;
+            font-size: 16px;
+            color: #555;
+        }
+        .event-info {
+            padding-left: 20px;
+        }
+        .event-info .detail-item {
+            margin: 15px 0;
+            font-size: 18px;
+        }
+        .buttons {
+            margin-top: 20px;
+            text-align: center;
+        }
+        .buttons a {
+            text-decoration: none;
+            color: white;
+            padding: 15px 30px;
+            border-radius: 5px;
+            margin: 15px;
+            display: inline-block;
+            font-size: 18px;
+            transition: all 0.3s ease;
+            font-weight: bold;
+            width: 150px;
+            text-align: center;
+        }
+        .btn-return {
+            background-color: #007bff;
+        }
+        .btn-return:hover {
+            background-color: #0056b3;
+            transform: scale(1.05);
+        }
+        .btn-edit {
+            background-color: #007bff;
+        }
+        .btn-edit:hover {
+            background-color: #0056b3;
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Event Details</h1>
+
+    <div class="event-details">
+        <!-- Description Section -->
+        <div class="description">
+            <img src="path-to-image.jpg" alt="Event Image">
+            <h2>Description:</h2>
+            <div class="detail-text">
+                <div>XXXXXXXXXXXXXXXXXXXXXX</div>
+                <div>XXXXXXXXXXXXXXXXXXXXXX</div>
+            </div>
+        </div>
+
+        <!-- Event Info Section -->
+        <div class="event-info">
+            <div class="detail-item"><strong>&lt; Event Name &gt;</strong> XXX </div>
+            <div class="detail-item"><strong>Date:</strong> XXX</div>
+            <div class="detail-item"><strong>Start Time:</strong> XXX</div>
+            <div class="detail-item"><strong>End Time:</strong> XXX</div>
+            <div class="detail-item"><strong>Ticket Type:</strong> XXX</div>
+            <div class="detail-item"><strong>Standing-Number-Available:</strong> XXX</div>
+            <div class="detail-item"><strong>Seating-Number-Available:</strong> XXX</div>
+            <div class="detail-item"><strong>Premium-Number-Available:</strong> XXX</div>
+        </div>
+    </div>
+
+    <!-- Buttons Section -->
+    <div class="buttons">
+        <a href="02-main-organiser.html" class="btn-return">Return</a>
+        <a href="#" class="btn-edit">Edit</a>
+    </div>
+</div>
+
+</body>
+</html>

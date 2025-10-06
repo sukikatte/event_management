@@ -1,0 +1,195 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+abstract class Account{
+name : String
+password : String
+email : String
+
++ editAccount()
+}
+
+
+class Administrator extends Account {
++ {static} Administrator administrator(name, password, email)
+
+}
+
+
+class Organizer extends Account {
+- company : String
+- phone_number : int
+- address : String
+
++ {static} Organizer(name, password, email, company, phone_number, address)
+}
+
+
+Event <-- Organizer : - event *
+
+
+
+class User extends Account {
+
++ {static} User(name, password, email)
+}
+
+
+Ticket <-- User : - tickets *
+
+
+
+class Venue {
+- name : String
+- address : String
+- total_capacity : int
+- manager : String
+- manager_phone_number : int
+- date : Date
+
++ {static} Venue(name, address, total_capacity)
+}
+
+
+Event <-- Venue : - schedule *
+Organizer <-- Venue : - organizer *
+
+
+
+class Event {
+- name : String
+- description : String
+- date : Date
+- startTime : int
+- endingTime : int
+- ticket_type: TicketType
+- StandingNumberAvailable : int
+- SeatingNumberAvailable : int
+- PremiumNumberAvailable : int
+
++ {static} Event(name, description, date, StandingNumberAvailable, SeatingNumberAvailable, PremiumNumberAvailable)
+}
+
+
+Organizer <-- Event : - organizer *
+Venue <-- Event : - venue 1
+
+
+
+
+enum TicketType {
+STANDING
+SEATING
+PREMIUM
+}
+
+
+class Ticket {
+- ticket_type: TicketType
+- admission: String
+
++ {static} Ticket(ticket_type, admission)
+}
+
+Event <-- Ticket : - event 1
+User <-- Ticket : - email 1
+
+
+class EventController{
++addEvent(details)
++updateEventDetail()
++confirmUpdate()
++deleteEvent()
++updateEventSchedule()
++viewEventDetail()
++updateDisplay()
+}
+
+class AccountController{
++registerUser(details)
++createOrganizer(details)
++createAdministrator(details)
++updateAccountDetail()
++confirmUpdate()
++manageAccount()
++viewAccountDetail()
++viewAccountHistory()
++viewVenueDetail()
++viewVenueList()
++updateDisplay()
+}
+
+class VenueController{
++addVenue(details)
++updateVenueDetail()
++confirmUpdate()
++manageVenue()
++viewVenueDetail()
++updateDisplay()
+}
+
+class TicketController{
++sellTickets(details)
++buyTicket(details))
++updateTicketDetail()
++confirmUpdate()
++viewTicketDetail()
++viewTicketsHistory()
++updateDisplay()
+}
+
+class VenueService{
++addVenue(details)
++updateVenue()
++deleteVenue()
++getVenue(name):Venue
++getVenueList(email):Venue[*]
+}
+
+class EventService{
++addEvent(details)
++updateEvent()
++deleteEvent()
++getEvent(name):Event
++getEventHistory(email):Event[*]
++getEventSchedule(email):Event[*]
+}
+
+class AccountService{
++addUser(details)
++addOrganizer(details)
++addAdministrator(details)
++updateAccount()
++deleteAccount()
++getUser(email):User
++getOrganizer(email):Organizer
++getAdministrator(email):Administrator
+}
+
+class TicketService{
++addTicket(details)
++deleteTicket()
++updateTicket()
++cancelTicket()
++getTicket(admission):Ticket
++getTicketsHistory(email): Ticket[*]
+}
+
+VenueService <- VenueController: - venue_service 1
+EventService <-- VenueController: - event_service 1
+EventService <-- EventController : - event_service 1
+VenueService <-- EventController : - venue_service 1
+AccountService <--- EventController : - account_service 1
+AccountService <-- AccountController : - account_service 1
+TicketService <--- AccountController : - ticket_service 1
+VenueService <--- AccountController : - venue_service 1
+EventService <-- AccountController : - event_service 1
+TicketService<- TicketController : - ticket_service 1
+EventService <--- TicketController : - event_service 1
+Venue <-- VenueService : - venue *
+Event <-- EventService : - event *
+User <-- AccountService : - user *
+Organizer <-- AccountService : - organizer *
+Administrator <-- AccountService : - administrator *
+Ticket <-- TicketService : - ticket *
+@enduml

@@ -1,0 +1,28 @@
+title Sequence Diagram: 03 View Account (Administrator Viewing Other Accounts)
+actor "Administrator" as a
+participantspacing 4
+control "<link:_>: AccountController" as s
+participant "<link:_>: AccountService" as r
+entity "<link:_>: Account" as ac
+
+==1.  The system displays the list accounts page **(02-list-accounts)** which shows the details of all accounts in the system\n2. The administrator selects the view account functionality adjacent to the account to view ==
+
+a->s:viewAccountDetail()
+activate s
+
+s->r:getAccount(type, name)
+activate r
+
+
+r->r:findAccount(type, name)
+
+r->ac:v:=getAccount()
+r-->s:return data
+deactivate r
+
+s->s:displayAccountPage()
+
+s-->a:use case finished!
+deactivate s
+
+==2. The system displays the view account page **(06-view&modify-account-admin-user, 12-view&modify-account-admin-admin, \n 15-view&modify-account-admin-organiser)** which shows the details of the selected account==

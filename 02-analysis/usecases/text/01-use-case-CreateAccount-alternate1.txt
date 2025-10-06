@@ -1,0 +1,27 @@
+title Sequence Diagram:01 Create Account\n(Alternative Courses of Events - Account Already Exists)
+actor "<link:_>Administrator" as a
+control "<link:_>: AccountController" as ac
+
+participant "<link:_>: AccountService" as as
+==1. The administrator selects the create account functionality\n2. The system displays an input form to get the required details\n    (based on the type of account being created) - 05-create-account\n3. The administrator enters the details of the account==
+a -> ac: CreateAccount(details)
+activate ac
+
+ac->as:addAccount(detail)
+activate as
+as -> as : getAccount(email)
+
+
+as-->ac:return EMAIL_USED
+deactivate as
+
+ac->ac:displayRegisterPage()
+
+ac-->a : 
+deactivate ac
+
+
+==4. The system detects that the account already exists==
+note right of a:This part happens in the JavaScript.
+
+==5.The administrator clicks OK\n6.The system returns to the create account page - 05-create-account==

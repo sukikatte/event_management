@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+</html><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Check Event - Admin</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f4f8;
+        }
+        .container {
+            width: 60%;
+            margin: 40px auto;
+            padding: 20px;
+            background-color: #dceeff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 28px;
+            color: #333;
+        }
+        h2 {
+            margin: 5px 0;
+            font-size: 18px;
+        }
+        .event-details {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+        }
+        .event-info, .description {
+            flex: 1;
+        }
+        .description {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .description img {
+            width: 100%;
+            max-width: 150px;
+            height: 200px;
+            object-fit: cover;
+            border: 2px dashed #007bff;
+            border-radius: 8px;
+            background-color: #e0e0e0;
+        }
+        .description p {
+            font-size: 18px;
+            color: #333;
+            font-weight: bold;
+            margin-top: 15px;
+        }
+        .detail-text {
+            text-align: center;
+            margin-top: 5px;
+            font-size: 16px;
+            color: #555;
+        }
+        .event-info {
+            padding-left: 20px;
+        }
+        .event-info .detail-item {
+            margin: 15px 0;
+            font-size: 18px;
+        }
+        .event-info select,
+        .event-info input[type="number"] {
+            font-size: 16px;
+            padding: 5px;
+            width: 50%;
+            border: 2px solid #ccc;
+            border-radius: 3px;
+            margin-bottom: 5px;
+        }
+        .ticket-number-container {
+            display: flex;
+            align-items: center;
+        }
+        .detail-item {
+            display: flex;
+            align-items: center;
+        }
+        .ticket-number-container button {
+            margin: 0 5px;
+            font-size: 16px;
+            width: 10%;
+        }
+        .ticket-number-container input {
+            font-size: 16px;
+            padding: 10px;
+            width: 50%;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+        .buttons {
+            margin-top: 20px;
+            text-align: center;
+        }
+        .buttons a {
+            text-decoration: none;
+            color: white;
+            padding: 15px 30px;
+            border-radius: 5px;
+            margin: 15px;
+            display: inline-block;
+            font-size: 18px;
+            transition: all 0.3s ease;
+            font-weight: bold;
+            width: 150px;
+            text-align: center;
+        }
+        .btn-return {
+            background-color: #007bff;
+        }
+        .btn-return:hover {
+            background-color: #0056b3;
+            transform: scale(1.05);
+        }
+        .btn-pay {
+            background-color: #28a745;
+        }
+        .btn-pay:hover {
+            background-color: #218838;
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Event Details</h1>
+
+    <div class="event-details">
+        <!-- Description Section -->
+        <div class="description">
+            <img src="path-to-image.jpg" alt="Event Image">
+            <h2>Description:</h2>
+            <div class="detail-text">
+                <div th:text="${event.description}">Event description goes here...</div>
+            </div>
+        </div>
+
+
+        <div class="event-info">
+            <div class="detail-item"><strong>Event Name:</strong> <span th:text="${event.getName()}"></span></div>
+            <div class="detail-item"><strong>Venue:</strong> <span th:text="${event.venue.getId()}"></span></div>
+            <div class="detail-item"><strong>Organizer:</strong> <span th:text="${event.organiser.getEmail()}"></span></div>
+            <div class="detail-item">
+                <strong>Date:</strong>&nbsp;&nbsp;&nbsp;
+                <select id="event-year">
+                    <option value="2024">2024</option>
+                    <option value="2025">2025</option>
+                    <option value="2026">2026</option>
+                    <option value="2027">2027</option>
+                </select>
+                <select id="event-month">
+                    <option value="1">January</option>
+                    <option value="2">February</option>
+                    <option value="3">March</option>
+                    <option value="4">April</option>
+                    <option value="5">May</option>
+                    <option value="6">June</option>
+                    <option value="7">July</option>
+                    <option value="8">August</option>
+                    <option value="9">September</option>
+                    <option value="10">March</option>
+                    <option value="11">November</option>
+                    <option value="12">December</option>
+
+                </select>
+                <select id="event-day">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                    <option value="11">11</option>
+                    <option value="12">12</option>
+                    <option value="13">13</option>
+                    <option value="14">14</option>
+                    <option value="15">15</option>
+                    <option value="16">16</option>
+                    <option value="17">17</option>
+                    <option value="18">18</option>
+                    <option value="19">19</option>
+                    <option value="20">20</option>
+                    <option value="21">21</option>
+                    <option value="22">22</option>
+                    <option value="23">23</option>
+                    <option value="24">24</option>
+                    <option value="25">25</option>
+                    <option value="26">26</option>
+                    <option value="27">27</option>
+                    <option value="28">28</option>
+                    <option value="29">29</option>
+                    <option value="30">30</option>
+                    <option value="31">31</option>
+
+
+
+                </select>
+            </div>
+
+            <div class="detail-item">
+                <strong>Time:</strong>&nbsp;&nbsp;&nbsp;
+                <select id="event-hour">
+                    <option value="0">09</option>
+                    <option value="1">10</option>
+                    <option value="2">11</option>
+                    <option value="3">12</option>
+                    <option value="4">13</option>
+                    <option value="5">14</option>
+                    <option value="6">15</option>
+                    <option value="7">16</option>
+                    <option value="8">18</option>
+                    <option value="9">19</option>
+                    <option value="10">20</option>
+                    <option value="11">21</option>
+                    <option value="12">22</option>
+
+                </select>
+                :
+                <select id="event-minute">
+                    <option value="0">00</option>
+                    <option value="15">15</option>
+                    <option value="30">30</option>
+                    <option value="45">45</option>
+                </select>
+            </div>
+            <div class="detail-item"><strong>Ticket Type:</strong>&nbsp;&nbsp;&nbsp;
+                <select id="ticket-price">
+                    <option value="1">Standing</option>
+                    <option value="2">Seating</option>
+                    <option value="3">Premium</option>
+                </select>
+            </div>
+            <div class="detail-item">
+                <strong>Number:</strong>&nbsp;&nbsp;&nbsp;
+                <div class="ticket-number-container">
+                    <button onclick="decreaseTicketNumber()">-</button>
+                    <input type="number" id="ticket-number" value="1" min="1">
+                    <button onclick="increaseTicketNumber()">+</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Buttons Section -->
+    <div class="buttons">
+        <a href="#" class="btn-return">Return</a>
+        <a href="#" class="btn-pay">Pay</a>
+    </div>
+</div>
+
+
+
+<script>
+    function decreaseTicketNumber() {
+        var ticketNumber = document.getElementById("ticket-number");
+        var currentValue = parseInt(ticketNumber.value);
+        if (currentValue > 1) {
+            ticketNumber.value = currentValue - 1;
+        }
+    }
+
+    function increaseTicketNumber() {
+        var ticketNumber = document.getElementById("ticket-number");
+        var currentValue = parseInt(ticketNumber.value);
+        ticketNumber.value = currentValue + 1;
+    }
+</script>
+</body>
+</html>

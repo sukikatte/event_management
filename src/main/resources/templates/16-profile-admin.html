@@ -1,0 +1,417 @@
+<!--<!DOCTYPE html>-->
+<!--<html lang="en">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+<!--    <title>Edit Profile</title>-->
+<!--    <style>-->
+<!--        body {-->
+<!--            font-family: Arial, sans-serif;-->
+<!--            margin: 0;-->
+<!--            padding: 0;-->
+<!--            background-color: #dceeff;-->
+<!--            height: 100vh;-->
+<!--            display: flex;-->
+<!--            flex-direction: column;-->
+<!--        }-->
+
+<!--        nav {-->
+<!--            display: flex;-->
+<!--            justify-content: space-around;-->
+<!--            align-items: center;-->
+<!--            background-color: #fff;-->
+<!--            padding: 15px 0;-->
+<!--            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);-->
+<!--        }-->
+
+<!--        nav a {-->
+<!--            text-decoration: none;-->
+<!--            color: #000;-->
+<!--            font-size: 16px;-->
+<!--            font-weight: bold;-->
+<!--        }-->
+
+<!--        nav a.active {-->
+<!--            color: #007bff;-->
+<!--            border-bottom: 2px solid #007bff;-->
+<!--            padding-bottom: 5px;-->
+<!--        }-->
+
+<!--        .profile-container {-->
+<!--            background-color: #ffffff;-->
+<!--            padding: 30px;-->
+<!--            border-radius: 10px;-->
+<!--            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);-->
+<!--            display: flex;-->
+<!--            justify-content: space-between;-->
+<!--            align-items: center;-->
+<!--            max-width: 900px;-->
+<!--            width: 90%;-->
+<!--            position: absolute;-->
+<!--            top: 50%;-->
+<!--            left: 50%;-->
+<!--            transform: translate(-50%, -50%);-->
+<!--        }-->
+
+<!--        .left-section {-->
+<!--            display: flex;-->
+<!--            flex-direction: column;-->
+<!--            align-items: center;-->
+<!--        }-->
+
+<!--        .image-placeholder {-->
+<!--            width: 150px;-->
+<!--            height: 150px;-->
+<!--            background-color: #e0e0e0;-->
+<!--            display: flex;-->
+<!--            justify-content: center;-->
+<!--            align-items: center;-->
+<!--            margin-bottom: 20px;-->
+<!--            border: 1px solid #ccc;-->
+<!--        }-->
+
+<!--        .btn-image {-->
+<!--            background-color: #007bff;-->
+<!--            color: white;-->
+<!--            border: none;-->
+<!--            padding: 10px 20px;-->
+<!--            font-size: 16px;-->
+<!--            border-radius: 5px;-->
+<!--            cursor: pointer;-->
+<!--            transition: background-color 0.3s ease;-->
+<!--        }-->
+
+<!--        .btn-image:hover {-->
+<!--            background-color: #0056b3;-->
+<!--        }-->
+
+<!--        .right-section {-->
+<!--            flex: 1;-->
+<!--            margin-left: 20px;-->
+<!--        }-->
+
+<!--        .form-group {-->
+<!--            display: flex;-->
+<!--            align-items: center;-->
+<!--            margin-bottom: 20px;-->
+<!--        }-->
+
+<!--        .form-group label {-->
+<!--            flex: 0 0 200px; /* 调整宽度，确保内容在一行 */-->
+<!--            font-size: 16px;-->
+<!--            font-weight: bold;-->
+<!--        }-->
+
+<!--        .form-group input {-->
+<!--            flex: 1;-->
+<!--            padding: 10px;-->
+<!--            font-size: 16px;-->
+<!--            border: 1px solid #ccc;-->
+<!--            border-radius: 5px;-->
+<!--            margin-right: 10px;-->
+<!--        }-->
+
+<!--        .btn-change {-->
+<!--            background-color: #007bff;-->
+<!--            color: white;-->
+<!--            border: none;-->
+<!--            padding: 10px;-->
+<!--            font-size: 16px;-->
+<!--            border-radius: 5px;-->
+<!--            cursor: pointer;-->
+<!--            transition: background-color 0.3s ease;-->
+<!--        }-->
+
+<!--        .btn-change:hover {-->
+<!--            background-color: #0056b3;-->
+<!--        }-->
+
+<!--        .button-group {-->
+<!--            display: flex;-->
+<!--            justify-content: space-between;-->
+<!--            margin-top: 20px;-->
+<!--        }-->
+
+<!--        .btn-save {-->
+<!--            background-color: #007bff;-->
+<!--            color: white;-->
+<!--            border: none;-->
+<!--            padding: 15px 30px;-->
+<!--            font-size: 16px;-->
+<!--            font-weight: bold;-->
+<!--            border-radius: 5px;-->
+<!--            cursor: pointer;-->
+<!--            transition: background-color 0.3s ease;-->
+<!--        }-->
+
+<!--        .btn-save:hover {-->
+<!--            background-color: #0056b3;-->
+<!--        }-->
+
+<!--        .btn-signout {-->
+<!--            background-color: #dc3545;-->
+<!--            color: white;-->
+<!--            border: none;-->
+<!--            padding: 15px 30px;-->
+<!--            font-size: 16px;-->
+<!--            font-weight: bold;-->
+<!--            border-radius: 5px;-->
+<!--            cursor: pointer;-->
+<!--            transition: background-color 0.3s ease;-->
+<!--        }-->
+
+<!--        .btn-signout:hover {-->
+<!--            background-color: #a71d2a;-->
+<!--        }-->
+<!--    </style>-->
+<!--</head>-->
+<!--<body>-->
+
+<!--<nav>-->
+<!--    <a href="#">Home</a>-->
+<!--    <a href="#" class="active">Profile</a>-->
+<!--    <a href="#">Venues</a>-->
+<!--    <a href="#">Accounts</a>-->
+<!--</nav>-->
+
+<!--<div class="profile-container">-->
+<!--    <div class="left-section">-->
+<!--        <div class="image-placeholder">-->
+<!--            <span>Image</span>-->
+<!--        </div>-->
+<!--        <button class="btn-image">Change Image</button>-->
+<!--    </div>-->
+<!--    <div class="right-section">-->
+<!--        <div class="form-group">-->
+<!--            <label for="administratorName">Administrator Name:</label>-->
+<!--            <input type="text" id="administratorName" placeholder="">-->
+<!--            <button class="btn-change">Change</button>-->
+<!--        </div>-->
+<!--        <div class="form-group">-->
+<!--            <label for="email">Email:</label>-->
+<!--            <input type="email" id="email" placeholder="">-->
+<!--            <button class="btn-change">Change</button>-->
+<!--        </div>-->
+<!--        <div class="form-group">-->
+<!--            <label for="password">Password:</label>-->
+<!--            <input type="password" id="password" placeholder="">-->
+<!--            <button class="btn-change">Change</button>-->
+<!--        </div>-->
+<!--        <div class="button-group">-->
+<!--            <button class="btn-save">Save</button>-->
+<!--            <button class="btn-signout">Sign out</button>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
+
+<!--</body>-->
+<!--</html>-->
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Profile</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #dceeff;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            background-color: #fff;
+            padding: 15px 0;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #000;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        nav a.active {
+            color: #007bff;
+            border-bottom: 2px solid #007bff;
+            padding-bottom: 5px;
+        }
+
+        .profile-container {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 900px;
+            width: 90%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .left-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .image-placeholder {
+            width: 150px;
+            height: 150px;
+            background-color: #e0e0e0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+        }
+
+        .btn-image {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-image:hover {
+            background-color: #0056b3;
+        }
+
+        .right-section {
+            flex: 1;
+            margin-left: 20px;
+        }
+
+        .form-group {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            flex: 0 0 120px;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .form-group input {
+            flex: 1;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .button-group {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        .btn-save {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-save:hover {
+            background-color: #0056b3;
+        }
+
+        .btn-cancel {
+            background-color: #dc3545;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-cancel:hover {
+            background-color: #a71d2a;
+        }
+
+        .error-message {
+            color: red;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .success-message {
+            color: green;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+<!-- 顶部导航栏 -->
+<nav>
+    <a href="/">Home</a>
+    <a href="/adminProfile" class="active">Profile</a>
+    <a href="/events">Events</a>
+    <a href="/venues">Venues</a>
+</nav>
+
+<div class="profile-container">
+    <div class="left-section">
+        <div class="image-placeholder">
+            <span>Image</span>
+        </div>
+        <button class="btn-image">Change Image</button>
+    </div>
+    <div class="right-section">
+        <!-- 动态错误消息 -->
+        <div th:if="${error}" class="error-message" th:text="${error}"></div>
+
+        <!-- 动态成功消息 -->
+        <div th:if="${param.update_success}" class="success-message">Profile updated successfully!</div>
+
+        <!-- 修改管理员信息表单 -->
+        <form th:action="@{/updateAdminProfile}" method="post">
+            <div class="form-group">
+                <label for="username">Administrator Name:</label>
+                <input type="text" id="username" name="username" th:value="${admin.name}" placeholder="Enter your name" required />
+            </div>
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" th:value="${admin.email}" placeholder="Enter your email" required />
+            </div>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" placeholder="Enter new password" />
+            </div>
+            <div class="button-group">
+                <button type="submit" class="btn-save">Save</button>
+                <button type="button" onclick="window.location.href='/'" class="btn-cancel">Cancel</button>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>

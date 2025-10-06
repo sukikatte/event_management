@@ -1,0 +1,36 @@
+title Sequence Diagram: 07 Add Venue
+actor organiser
+control "<link:_>: VenueController" as venueController
+participant "<link:_>: VenueService" as venueService
+entity "<link:_>v: Venue" as venue
+
+
+== 1. The organiser selects the add venue functionality \n 2. The system displays the add and modify venue page (24-modify-venue-organiser) page \n 3. The organiser enters the details of the venue ==
+
+organiser -> venueController: addVenue(details)
+activate venueController
+venueController -> venueService: addVenue(details)
+activate venueService
+venueService -> venueService: getVenue(details)
+activate venueService
+venueService --> venueService: return false
+deactivate venueService
+note over venueService: The getVenue method checks if a venue\n is already exists in the database.
+venueService -> venueService: getOrganiser(details)
+activate venueService
+venueService --> venueService: return o
+deactivate venueService
+note over venueService: The getOrganiser method is a standin for\nthe future operation of retrieving the organiser\n with the correct details from database
+
+
+venueService -> *venue: addVenue(name, address,\ncapacity, price)
+activate venue
+note over venueService: The addVenue method stores\nthe new venue details in the database
+venue --> venueService: return venue
+deactivate venue
+venueService -> venueController: displayVenue(details)
+deactivate venueService
+venueController -> organiser: displayVenueSchedule("22-venues-organiser")
+deactivate venueController
+
+== 4. The system shows the new venue on the list venues page (22-venues-organiser) ==

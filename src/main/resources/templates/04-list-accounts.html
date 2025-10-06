@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accounts Page</title>
+    <style>
+        /* 页面基础样式 */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+        }
+
+        /* 顶部导航栏样式 */
+        nav {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            background-color: #fff;
+            padding: 15px 0;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #000;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        nav a.active {
+            color: #007bff;
+            border-bottom: 2px solid #007bff;
+            padding-bottom: 5px;
+        }
+
+        /* 搜索和按钮区域样式 */
+        .search-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            background-color: #fff;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .search-section select,
+        .search-section input[type="text"],
+        .search-section button {
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-right: 10px;
+        }
+
+        .search-section button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .search-section button:hover {
+            background-color: #0056b3;
+        }
+
+        /* 账号卡片容器样式 */
+        .accounts-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            padding: 20px;
+        }
+
+        /* 单个账号卡片样式 */
+        .account-card {
+            display: flex;
+            align-items: center;
+            padding: 20px;
+            background-color: white;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .account-card img {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            margin-right: 15px;
+            background-color: #007bff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 30px;
+            font-weight: bold;
+        }
+
+        .account-details {
+            font-size: 16px;
+            line-height: 1.5;
+        }
+
+        .account-details strong {
+            display: block;
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+
+<!-- 顶部导航栏 -->
+<nav>
+    <a href="#">Home</a>
+    <a href="#">Profile</a>
+    <a href="#">Venues</a>
+    <a href="#" class="active">Accounts</a>
+</nav>
+
+<!-- 搜索区域 -->
+<div class="search-section">
+    <select>
+        <option value="">Select Identification</option>
+        <option value="Admin">Admin</option>
+        <option value="Organizer">Organizer</option>
+        <option value="User">User</option>
+    </select>
+    <input type="text" placeholder="input email or user name......">
+    <button>Search</button>
+    <button>New Account</button>
+</div>
+
+<!-- 账号卡片区域 -->
+<div class="accounts-grid">
+    <div class="account-card">
+        <div class="account-icon">
+            <img src="#" alt="User Icon" style="background-color: #007bff;">👤
+        </div>
+        <div class="account-details">
+            <strong>Name: XXXX</strong>
+            <span>Email: XXXXXXXX@email.com</span>
+        </div>
+    </div>
+    <div class="account-card">
+        <div class="account-icon">
+            <img src="#" alt="User Icon">👤
+        </div>
+        <div class="account-details">
+            <strong>Name: XXXX</strong>
+            <span>Email: XXXXXXXX@email.com</span>
+        </div>
+    </div>
+    <!-- 继续添加更多卡片 -->
+</div>
+
+</body>
+</html>

@@ -1,0 +1,33 @@
+title Sequence Diagram: 12 Add Event
+
+actor "Organiser" as organizer
+control "<link:_>: EventController" as eventController
+participant "<link:_>: EventService" as eventService
+entity "<link:_>e: Event" as event
+
+==1. The organiser selects the add event functionality \n2. The system displays the add event and modify page (19-modify-event-organiser) page\n3. The organiser enters the details of the event==
+organizer -> eventController: addEvent(details)
+activate eventController
+eventController -> eventService: addEvent(details)
+activate eventService
+eventService -> eventService: getEvent(details)
+activate eventService
+eventService --> eventService: return false
+deactivate eventService
+note over eventService: The getEvent method checks if the \nevent is already exists in the database.
+eventService -> eventService: getOrganiser(details)
+activate eventService
+eventService --> eventService: return o
+deactivate eventService
+note over eventService: The getOrganiser method is a standin for\nthe future operation of retrieving the organiser\n with the correct details from database
+
+eventService -> *event: addEvent(name, venueNo, \ndate, time, price, number)
+activate event
+note over eventService: The addEvent method stores\nthe new event details in the database
+event --> eventService: return event
+deactivate event
+eventService --> eventController: displayEvent(details)
+deactivate eventService
+eventController --> organizer: displayEventScedule("20-events-organiser")
+deactivate eventController
+ ==4. The system shows the new event on the list events page (20-events-organiser)==

@@ -1,0 +1,54 @@
+title Sequence Diagram: 04 Modify Account (Organizer Modifying Their Own Account)
+
+actor "Organizer" as a
+control "<link:_>:AccountController" as c
+participant "<link:_>:AccountService" as s
+entity Organizer
+
+==1. The organizer selects the "change" option for either username, email, or password on view account page **(06-view-account)**\n2. The system displays the modify one of the account detail information which shows the detail as editable fields\n3. The organizer updated detail of the account and clicks save==
+
+a -> c : modifyAccount(details)
+activate c
+c -> s : modifyAccount(details)
+activate s
+
+    alt Modifying name
+      s-> Organizer: setName(name)
+      activate Organizer
+      deactivate Organizer
+
+      else Modifying email
+      s-> Organizer: setEmail(email)
+      activate Organizer
+      deactivate Organizer
+
+      else Modifying password
+      s-> Organizer: setPassword(password)
+      activate Organizer
+      deactivate Organizer
+      
+      else Modifying Company Name
+      s-> Organizer: setCompanyName(companyName)
+      activate Organizer
+      deactivate Organizer
+      
+      else Modifying telephone
+      s-> Organizer: setPhoneNumber(telephone)
+      activate Organizer
+      deactivate Organizer
+      
+      else Modifying address
+      s-> Organizer: setAddress(address)
+      activate Organizer
+      deactivate Organizer
+      end
+      s --> c : Return Organizer account
+      deactivate s
+      c -> c : updateDisplay()
+    
+
+
+c --> a : use case finished!
+deactivate c
+
+==4. The system displays the view account page **(21-profile-organiser)** with the updated detail of the account==

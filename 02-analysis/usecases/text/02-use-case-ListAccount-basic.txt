@@ -1,0 +1,27 @@
+title Sequence Diagram: List Account
+
+
+actor "<link:_> Administrator" as Administrator
+control "<link:_>: AccountController" as AccountController
+entity "<link:_>oa: Organiser" as oa
+entity "<link:_>aa: Administrator" as aa
+participant "<link:_>: AccountService" as AccountService
+
+
+ == 1.The administrator selects the list accounts functionality==
+    Administrator->>AccountController: viewAccountDetail()  
+    activate AccountController
+
+    AccountController->>AccountService:getAccount(type,name)  
+    activate AccountService
+    AccountService-->>AccountController: Return Account
+    deactivate AccountService
+    AccountController -> AccountController:DisplayAccountPage()
+    
+
+
+
+    AccountController-->>Administrator: viewAccountDetail()  
+    deactivate AccountController
+ 
+     == 2.The system displays the list accounts page (04-list-accounts)\n which shows the details of all accounts in the system==

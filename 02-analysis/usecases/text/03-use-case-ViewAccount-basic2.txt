@@ -1,0 +1,29 @@
+title Sequence Diagram: 03 View Account (Administrator, Organiser or User Viewing Their Account)
+actor "Administrator/ Organizer/ User" as a
+participantspacing 4
+control "<link:_>: AccountController" as s
+participant "<link:_>: AccountService" as r
+entity "<link:_>: Account" as ac
+
+
+==1. The administrator, organiser or user selects the own account functionality on the main page for their account type **(01-main-admin, 02-main-organiser, 03-main-user)**==
+
+a->s:viewAccountDetail()
+activate s
+
+s->r:getAccount(type, name)
+activate r
+
+
+r->r:findAccount(type, name)
+
+r->ac:v:=getAccount()
+r-->s:return account
+deactivate r
+
+s->s:displayAccountPage()
+
+s-->a:use case finished!
+deactivate s
+
+==2. The system displays the view account page **(16-profile-admin, 21-profile-organiser, 08-profile-user)** which shows the details of the selected account==
