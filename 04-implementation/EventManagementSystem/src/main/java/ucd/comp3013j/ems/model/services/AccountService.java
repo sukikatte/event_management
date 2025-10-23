@@ -116,9 +116,33 @@ public class AccountService {
 
 
     public void saveUser(ModifyAccountDTO registration) {
-        User u = new User(registration);
-        userRepository.save(u);
-        System.out.println("Saved User: " + u);
+        if ("ORGANISER".equals(registration.getRole())) {
+            // 创建Organiser账户
+            Organiser organiser = new Organiser(
+                registration.getName(),
+                registration.getEmail(),
+                registration.getPassword(),
+                registration.getCompanyName() != null ? registration.getCompanyName() : "",
+                registration.getAddress() != null ? registration.getAddress() : "",
+                registration.getPhoneNumber() != null ? registration.getPhoneNumber() : ""
+            );
+            organiserRepository.save(organiser);
+            System.out.println("Saved Organiser: " + organiser);
+        } else if ("ADMINISTRATOR".equals(registration.getRole())) {
+            // 创建Administrator账户
+            Administrator administrator = new Administrator(
+                registration.getEmail(),
+                registration.getName(),
+                registration.getPassword()
+            );
+            adminRepository.save(administrator);
+            System.out.println("Saved Administrator: " + administrator);
+        } else {
+            // 默认创建User账户
+            User user = new User(registration);
+            userRepository.save(user);
+            System.out.println("Saved User: " + user);
+        }
     }
 
     public List<Account> getAccounts() {

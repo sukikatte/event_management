@@ -87,7 +87,7 @@ public class EventController {
         Venue venue = eventService.getVenue(vId);
         m.addAttribute("venue", venue);
 
-        return "venue-details";
+        return "23-check-venue-organiser";
 
     }
 
@@ -108,7 +108,7 @@ public class EventController {
         model.addAttribute("venue", venue);
         model.addAttribute("vDTO", vdto);
 
-        return "modify-venue";
+        return "24-modify-venue-organiser";
     }
 
     @PostMapping("/modifyVenue")
@@ -121,11 +121,11 @@ public class EventController {
             model.addAttribute("venue", venue);
             model.addAttribute("errorDTO", errdto);
 
-            return "modify-venue-error";
+            return "25-modify-venue-error-organiser";
         }
 
         eventService.modifyVenue(vdto, venue);
-        return "modify-venue";
+        return "24-modify-venue-organiser";
     }
 
 
@@ -136,7 +136,7 @@ public class EventController {
             eventService.deleteVenue(venue);
         }
         eventService.getAllVenues();
-        return "delete-venue";
+        return "30-delete-venue-warning";
     }
 
 
@@ -237,7 +237,7 @@ public class EventController {
         List<Event> events = eventService.getAllEvents();
         m.addAttribute("events", events);
         m.addAttribute("account", account);
-        return "list-events";
+        return "20-events-organiser";
     }
 
 
@@ -393,7 +393,7 @@ public class EventController {
             return "10-buy-tickets";
         } catch (Exception e) {
             System.err.println("Error in displayEventDetailUser: " + e.getMessage());
-            return "error"; // Redirect to a proper error page
+            return "28-add-event-error";
         }
     }
 

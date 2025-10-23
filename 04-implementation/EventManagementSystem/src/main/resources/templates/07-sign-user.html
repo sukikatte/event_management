@@ -6,7 +6,7 @@
     <title>Sign In</title>
     <style>
         body {
-            background-image: url("https://gues-songs.oss-cn-beijing.aliyuncs.com/songs/bg1.jpg");
+            background-image: url("/img/bg1.jpg");
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
@@ -66,6 +66,16 @@
             background-color: rgb(255, 255, 255, 0.55);
         }
 
+        .form-group select {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+            background-color: rgb(255, 255, 255, 0.55);
+        }
+
         .action-buttons {
             display: flex;
             justify-content: space-between;
@@ -107,11 +117,11 @@
     <form th:action="@{/register}" method="POST" onsubmit="return validateForm()">
         <div class="form-group">
             <label for="name">Name:</label>
-            <input type="text" id="email" name="email" placeholder="" required />
+            <input type="text" id="name" name="name" placeholder="" required />
         </div>
         <div class="form-group">
             <label for="email">Email:</label>
-            <input type="email" id="name" name="name" placeholder="" required />
+            <input type="email" id="email" name="email" placeholder="" required />
         </div>
         <div class="form-group">
             <label for="password">Password:</label>
@@ -121,11 +131,71 @@
             <label for="verify-password">Verify Password:</label>
             <input type="password" id="verify-password" name="verify-password" placeholder="" required />
         </div>
+        <div class="form-group">
+            <label for="role">User Type:</label>
+            <select id="role" name="role" required onchange="toggleRoleFields()">
+                <option value="">Please select your role</option>
+                <option value="USER">User</option>
+                <option value="ORGANISER">Organiser</option>
+                <option value="ADMINISTRATOR">Administrator</option>
+            </select>
+        </div>
+        <div id="organiserFields" class="form-group" style="display: none;">
+            <label for="companyName">Company Name:</label>
+            <input type="text" id="companyName" name="companyName" placeholder="" />
+        </div>
+        <div id="organiserFields2" class="form-group" style="display: none;">
+            <label for="address">Address:</label>
+            <input type="text" id="address" name="address" placeholder="" />
+        </div>
+        <div id="organiserFields3" class="form-group" style="display: none;">
+            <label for="phoneNumber">Phone Number:</label>
+            <input type="text" id="phoneNumber" name="phoneNumber" placeholder="" />
+        </div>
         <div class="action-buttons">
             <button type="submit" class="sign-in-btn">Sign in</button>
             <button type="button" class="cancel-btn" onclick="window.location.href='/'">Cancel</button>
         </div>
     </form>
 </div>
+
+<script>
+function toggleRoleFields() {
+    const roleSelect = document.getElementById('role');
+    const organiserFields = document.getElementById('organiserFields');
+    const organiserFields2 = document.getElementById('organiserFields2');
+    const organiserFields3 = document.getElementById('organiserFields3');
+    
+    if (roleSelect.value === 'ORGANISER') {
+        organiserFields.style.display = 'block';
+        organiserFields2.style.display = 'block';
+        organiserFields3.style.display = 'block';
+        // 设置必填
+        document.getElementById('companyName').required = true;
+        document.getElementById('address').required = true;
+        document.getElementById('phoneNumber').required = true;
+    } else {
+        organiserFields.style.display = 'none';
+        organiserFields2.style.display = 'none';
+        organiserFields3.style.display = 'none';
+        // 取消必填
+        document.getElementById('companyName').required = false;
+        document.getElementById('address').required = false;
+        document.getElementById('phoneNumber').required = false;
+    }
+}
+
+function validateForm() {
+    const password = document.getElementById('password').value;
+    const verifyPassword = document.getElementById('verify-password').value;
+    
+    if (password !== verifyPassword) {
+        alert('Passwords do not match!');
+        return false;
+    }
+    
+    return true;
+}
+</script>
 </body>
 </html>

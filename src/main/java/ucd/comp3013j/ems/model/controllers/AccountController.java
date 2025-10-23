@@ -30,8 +30,8 @@ public class AccountController {
         this.eventService = es;
     }
 
-    @GetMapping(value = {"/", "", "/login", "/login/"})
-    public String login(Model model) {
+    @GetMapping(value = {"/", ""})
+    public String home(Model model) {
         model.addAttribute("registration", new ModifyAccountDTO());
         System.out.println("Printing list of accounts");
         for (Account a: accountService.getAccounts()){
@@ -156,14 +156,14 @@ public class AccountController {
     public String displayAccount(@RequestParam long accountId, Model model) {
         Account account = accountService.getAccount(accountId);
         model.addAttribute("account", account);
-        return "account-details";
+        return "06-view&modify-account-admin-user";
     }
 
     @GetMapping("/modifyAccount")
     public String modifyAccount(@RequestParam long accountId, Model model) {
         Account account = accountService.getAccount(accountId);
         model.addAttribute("account", account);
-        return "modify-account";
+        return "06-view&modify-account-admin-user";
     }
 
     @PostMapping("/modifyAccount")
@@ -193,7 +193,7 @@ public class AccountController {
             Administrator account = accountService.getAdministratorAccount(aw.getUsername());
             model.addAttribute("admin", account);
         }
-        return "16-profile-admin.html"; // 返回管理员页面模板
+        return "16-profile-admin"; // 返回管理员页面模板
     }
 
     @GetMapping("/organiserProfile")
@@ -202,7 +202,7 @@ public class AccountController {
             Organiser account = accountService.getOrganizerAccount(aw.getUsername());
             model.addAttribute("organiser", account);
         }
-        return "21-profile-organiser.html"; // 返回 Organiser 页面模板
+        return "21-profile-organiser"; // 返回 Organiser 页面模板
     }
 
 
@@ -294,7 +294,7 @@ public class AccountController {
 
         // 更新失败，返回错误消息
         model.addAttribute("error", "Failed to update profile. Please try again.");
-        return "16-profile-admin.html";
+        return "16-profile-admin";
     }
 
     @PostMapping("/updateOrganiserProfile")
@@ -351,7 +351,7 @@ public class AccountController {
 
         // 更新失败，返回错误消息
         model.addAttribute("error", "Failed to update profile. Please try again.");
-        return "21-profile-organiser.html";
+        return "21-profile-organiser";
     }
 
 }

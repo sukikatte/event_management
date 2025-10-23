@@ -7,9 +7,15 @@
     <style>
 
         body {
+            background-image: url("/img/bg2.jpg");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
+            height: 100vh;
         }
 
         nav {
@@ -111,12 +117,31 @@
             border: 1px solid #dee2e6;
             border-radius: 5px;
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
-            height: 150px;
+            height: 200px;
             font-size: 1rem;
             font-weight: bold;
             text-align: center;
+            padding: 10px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .event-card .event-image {
+            width: 100%;
+            height: 70%;
+            object-fit: cover;
+            border-radius: 3px;
+            margin-bottom: 8px;
+        }
+
+        .event-card .event-name {
+            font-size: 0.9rem;
+            color: #333;
+            margin: 0;
+            line-height: 1.2;
         }
     </style>
 </head>
@@ -138,14 +163,38 @@
 <!-- 主容器 -->
 <main class="container">
     <section class="events-grid">
-        <a href="14-check-event-admin.html" class="event-card">Event 1 Name</a>
-        <a href="14-check-event-admin.html" class="event-card">Event 2 Name</a>
-        <a href="14-check-event-admin.html" class="event-card">Event 3 Name</a>
-        <a href="14-check-event-admin.html" class="event-card">Event 4 Name</a>
-        <a href="14-check-event-admin.html" class="event-card">Event 5 Name</a>
-        <a href="14-check-event-admin.html" class="event-card">Event 6 Name</a>
-        <a href="14-check-event-admin.html" class="event-card">Event 7 Name</a>
-        <a href="14-check-event-admin.html" class="event-card">Event 8 Name</a>
+        <a href="14-check-event-admin.html" class="event-card">
+            <img src="/img/event1.jpg" alt="Event 1" class="event-image" onerror="this.src='/img/default-event.jpg'">
+            <div class="event-name">Event 1 Name</div>
+        </a>
+        <a href="14-check-event-admin.html" class="event-card">
+            <img src="/img/event2.jpg" alt="Event 2" class="event-image" onerror="this.src='/img/default-event.jpg'">
+            <div class="event-name">Event 2 Name</div>
+        </a>
+        <a href="14-check-event-admin.html" class="event-card">
+            <img src="/img/event3.jpg" alt="Event 3" class="event-image" onerror="this.src='/img/default-event.jpg'">
+            <div class="event-name">Event 3 Name</div>
+        </a>
+        <a href="14-check-event-admin.html" class="event-card">
+            <img src="/img/event4.jpg" alt="Event 4" class="event-image" onerror="this.src='/img/default-event.jpg'">
+            <div class="event-name">Event 4 Name</div>
+        </a>
+        <a href="14-check-event-admin.html" class="event-card">
+            <img src="/img/event5.jpg" alt="Event 5" class="event-image" onerror="this.src='/img/default-event.jpg'">
+            <div class="event-name">Event 5 Name</div>
+        </a>
+        <a href="14-check-event-admin.html" class="event-card">
+            <img src="/img/event6.jpg" alt="Event 6" class="event-image" onerror="this.src='/img/default-event.jpg'">
+            <div class="event-name">Event 6 Name</div>
+        </a>
+        <a href="14-check-event-admin.html" class="event-card">
+            <img src="/img/event7.jpg" alt="Event 7" class="event-image" onerror="this.src='/img/default-event.jpg'">
+            <div class="event-name">Event 7 Name</div>
+        </a>
+        <a href="14-check-event-admin.html" class="event-card">
+            <img src="/img/event8.jpg" alt="Event 8" class="event-image" onerror="this.src='/img/default-event.jpg'">
+            <div class="event-name">Event 8 Name</div>
+        </a>
     </section>
 </main>
 

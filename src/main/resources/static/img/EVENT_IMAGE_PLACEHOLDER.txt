@@ -1,0 +1,28 @@
+# 事件图片占位符文件
+
+这是一个占位符文件，用于说明需要添加的事件图片。
+
+## 需要的图片文件：
+- event1.jpg
+- event2.jpg  
+- event3.jpg
+- event4.jpg
+- event5.jpg
+- event6.jpg
+- event7.jpg
+- event8.jpg
+- default-event.jpg
+
+## 如何添加图片：
+1. 将事件图片重命名为对应的文件名（如 event1.jpg）
+2. 将图片文件放置在 src/main/resources/static/img/ 目录下
+3. 确保图片格式为 JPG 或 PNG
+4. 建议尺寸为 400x300 像素
+
+## 图片显示效果：
+- 每个事件卡片现在都会显示对应的图片
+- 图片占据卡片70%的高度
+- 事件名称显示在图片下方
+- 如果图片不存在，会显示默认图片
+
+现在事件列表看起来更加美观和专业！

@@ -26,6 +26,7 @@ public class Event {
 
     private String name;
     private String description;
+    private String imageUrl;
     private LocalDate date;
     private LocalTime startTime;
     private LocalTime endTime;
@@ -62,10 +63,11 @@ public class Event {
      */
 
     // 构造函数
-    public Event(String name, String description, LocalDate date, LocalTime startTime, LocalTime endTime,
+    public Event(String name, String description, String imageUrl, LocalDate date, LocalTime startTime, LocalTime endTime,
                  int standingNumberAvailable, int seatingNumberAvailable, int premiumNumberAvailable, Venue v, Organiser o) {
         this.name = name;
         this.description = description;
+        this.imageUrl = imageUrl;
         this.date = date;
         this.startTime = startTime;
         this.endTime = endTime;
